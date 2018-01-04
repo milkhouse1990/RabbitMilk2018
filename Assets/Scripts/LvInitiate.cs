@@ -27,57 +27,51 @@ public class LvInitiate : MonoBehaviour
     {
         XmlSaver xs = new XmlSaver();
         string path = "Level/" + MapName + ".lv";
-        if (xs.hasFile(path))
+        LevelInfo levelinfo = xs.GetInfo(path, typeof(LevelInfo)) as LevelInfo;
+
+        Camera.main.GetComponent<CameraFollow>().CameraMode = 0;
+        Camera.main.GetComponent<CameraFollow>().Rooms = levelinfo.Rooms;
+
+        foreach (LevelItem li in levelinfo.items)
         {
-            string datastring = xs.LoadXML(path);
-            LevelInfo levelinfo = xs.DeserializeObject(datastring, typeof(LevelInfo)) as LevelInfo;
+            string tag = li.tag;
+            string name = li.name;
+            float x = li.x;
+            float y = li.y;
 
-            Camera.main.GetComponent<CameraFollow>().CameraMode = 0;
-            Camera.main.GetComponent<CameraFollow>().Rooms = levelinfo.Rooms;
-
-            foreach (LevelItem li in levelinfo.items)
+            if (li.tag != "Player" || (li.tag == "Player" && player == null))
             {
-                string tag = li.tag;
-                string name = li.name;
-                float x = li.x;
-                float y = li.y;
-
-                if (li.tag != "Player" || (li.tag == "Player" && player == null))
-                {
-                    GameObject pre = Resources.Load("Prefabs\\" + tag + "\\" + name, typeof(GameObject)) as GameObject;
-                    if (!pre)
-                        Debug.Log("tile " + name + " load failed.");
-
-                    pre = Instantiate(pre, new Vector3(x, y, 0), Quaternion.identity);
-                    pre.name = name;
-                }
-                else
-                {
-                    player.transform.position = new Vector3(x, y, 0);
-                    Camera.main.GetComponent<CameraFollow>().FindCurrentRoom();
-                }
-            }
-            foreach (EventItem ei in levelinfo.events)
-            {
-                string tag = "Event";
-                string name = ei.name;
-                float x = ei.x;
-                float y = ei.y;
-
                 GameObject pre = Resources.Load("Prefabs\\" + tag + "\\" + name, typeof(GameObject)) as GameObject;
                 if (!pre)
                     Debug.Log("tile " + name + " load failed.");
 
                 pre = Instantiate(pre, new Vector3(x, y, 0), Quaternion.identity);
                 pre.name = name;
-                if (name == "GotoPlot")
-                    pre.GetComponent<Plot>().plotno = ei.arg;
-                else if (name == "GotoScene")
-                    pre.GetComponent<GotoScene>().scenename = ei.arg;
+            }
+            else
+            {
+                player.transform.position = new Vector3(x, y, 0);
+                Camera.main.GetComponent<CameraFollow>().FindCurrentRoom();
             }
         }
-        else
-            Debug.Log("the level data does not exist.");
+        foreach (EventItem ei in levelinfo.events)
+        {
+            string tag = "Event";
+            string name = ei.name;
+            float x = ei.x;
+            float y = ei.y;
+
+            GameObject pre = Resources.Load("Prefabs\\" + tag + "\\" + name, typeof(GameObject)) as GameObject;
+            if (!pre)
+                Debug.Log("tile " + name + " load failed.");
+
+            pre = Instantiate(pre, new Vector3(x, y, 0), Quaternion.identity);
+            pre.name = name;
+            if (name == "GotoPlot")
+                pre.GetComponent<Plot>().plotno = ei.arg;
+            else if (name == "GotoScene")
+                pre.GetComponent<GotoScene>().scenename = ei.arg;
+        }
 
         // read story
         path = "Text/" + MapName + ".story";

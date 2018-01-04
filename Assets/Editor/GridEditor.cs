@@ -191,29 +191,23 @@ public class GridEditor : Editor
                     // load the map
                     xs = new XmlSaver();
                     path = "Level/" + grid.scenename + ".lv";
-                    if (xs.hasFile(path))
+                    levelinfo = xs.GetInfo(path, typeof(LevelInfo)) as LevelInfo;
+
+                    Camera.main.GetComponent<CameraFollow>().CameraMode = 0;
+                    Camera.main.GetComponent<CameraFollow>().Rooms = levelinfo.Rooms;
+
+                    foreach (LevelItem li in levelinfo.items)
                     {
-                        datastring = xs.LoadXML(path);
-                        levelinfo = xs.DeserializeObject(datastring, typeof(LevelInfo)) as LevelInfo;
+                        string tag = li.tag;
+                        name = li.name;
+                        float x = li.x;
+                        float y = li.y;
 
-                        Camera.main.GetComponent<CameraFollow>().CameraMode = 0;
-                        Camera.main.GetComponent<CameraFollow>().Rooms = levelinfo.Rooms;
-
-                        foreach (LevelItem li in levelinfo.items)
-                        {
-                            string tag = li.tag;
-                            name = li.name;
-                            float x = li.x;
-                            float y = li.y;
-
-                            loaded = Resources.Load("Prefabs\\" + tag + "\\" + name, typeof(GameObject));
-                            pre = PrefabUtility.InstantiatePrefab(loaded) as GameObject;
-                            pre.name = name;
-                            pre.transform.position = new Vector3(x, y, 0);
-                        }
+                        loaded = Resources.Load("Prefabs\\" + tag + "\\" + name, typeof(GameObject));
+                        pre = PrefabUtility.InstantiatePrefab(loaded) as GameObject;
+                        pre.name = name;
+                        pre.transform.position = new Vector3(x, y, 0);
                     }
-                    else
-                        Debug.Log("the level data does not exist.");
                     break;
             }
         }

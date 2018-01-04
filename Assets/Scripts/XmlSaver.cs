@@ -101,4 +101,18 @@ public class XmlSaver
         byte[] byteArray = encoding.GetBytes(pXmlString);
         return byteArray;
     }
+    public object GetInfo(string path, System.Type ty)
+    {
+        if (hasFile(path))
+        {
+            string xmlstring = LoadXML(path);
+            object obj = DeserializeObject(xmlstring, ty);
+            return obj;
+        }
+        else
+        {
+            Debug.Log("cannot load file " + path);
+            return null;
+        }
+    }
 }

@@ -21,22 +21,17 @@ public class ReadList
     {
         XmlSaver xs = new XmlSaver();
         string path = "Menu/" + binid + ".xml";
-        if (xs.hasFile(path))
+        ListItems list = xs.GetInfo(path, typeof(ListItems)) as ListItems;
+
+        int i = list.items.Length;
+        items = new string[i];
+        infos = new string[i];
+        i = 0;
+        foreach (Item it in list.items)
         {
-            string xmlstring = xs.LoadXML(path);
-            ListItems list = xs.DeserializeObject(xmlstring, typeof(ListItems)) as ListItems;
-            int i = list.items.Length;
-            items = new string[i];
-            infos = new string[i];
-            i = 0;
-            foreach (Item it in list.items)
-            {
-                items[i] = it.name;
-                infos[i] = it.info;
-                i++;
-            }
+            items[i] = it.name;
+            infos[i] = it.info;
+            i++;
         }
-        else
-            Debug.Log("cannot load file " + path);
     }
 }
