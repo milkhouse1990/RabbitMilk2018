@@ -1,0 +1,14 @@
+<ListItems>
+    <items>
+        <Item>
+            <name>Max</name>
+            <info>增加HP上限和MP上限的精灵。
+现在等级</info>
+        </Item>
+        <Item>
+            <name>Drop</name>
+            <info>增加心和水晶掉率的精灵。
+现在等级</info>
+        </Item>
+    </items>
+</ListItems> 

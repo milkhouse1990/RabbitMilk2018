@@ -1,0 +1,12 @@
+<ListItems>
+    <items>
+        <Item>
+            <name>确定要升级该精灵吗？</name>
+            <info>A 是</info>
+        </Item>
+        <Item>
+            <name>（确认之后将无法撤回）</name>
+            <info>B 否</info>
+        </Item>
+    </items>
+</ListItems>

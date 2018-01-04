@@ -1,0 +1,12 @@
+<ListItems>
+    <items>
+        <Item>
+            <name>确定要覆盖原存档吗？</name>
+            <info>A 是</info>
+        </Item>
+        <Item>
+            <name>（覆盖后将不能撤回）</name>
+            <info>B 否</info>
+        </Item>
+    </items>
+</ListItems>

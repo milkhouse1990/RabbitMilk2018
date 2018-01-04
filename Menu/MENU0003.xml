@@ -1,0 +1,19 @@
+<ListItems>
+    <items>
+        <Item>
+            <name>Happy Ending</name>
+            <info>触发条件：按照正常流程攻略
+牛奶酱救回了公主，打跑了坏人，王国又恢复了和平。</info>
+        </Item>
+        <Item>
+            <name>最速Clear</name>
+            <info>触发条件：生日Party上在和对话后攻击她
+牛奶酱提前识破了坏人的阴谋，阻止了一切的发生。</info>
+        </Item>
+        <Item>
+            <name>地狱Ending</name>
+            <info>触发条件：Miss100次
+不管怎样都过不了关，于是死后在地狱和???过上了幸福的生活。</info>
+        </Item>
+    </items>
+</ListItems>

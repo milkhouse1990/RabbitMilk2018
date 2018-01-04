@@ -1,0 +1,24 @@
+<ListItems>
+    <items>
+        <Item>
+            <name>New Game</name>
+            <info>从头开始游戏</info>
+        </Item>
+        <Item>
+            <name>Load Data</name>
+            <info>读取存档继续游戏</info>
+        </Item>
+        <Item>
+            <name>Library</name>
+            <info>查看游戏的各种资料</info>
+        </Item>
+        <Item>
+            <name>Options</name>
+            <info>未使用</info>
+        </Item>
+        <Item>
+            <name>Quit</name>
+            <info>退出游戏</info>
+        </Item>
+    </items>
+</ListItems>

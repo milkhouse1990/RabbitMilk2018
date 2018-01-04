@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1723694486893898}
+  m_IsPrefabParent: 1
+--- !u!1 &1723694486893898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4994258881078352}
+  - component: {fileID: 114595413725594146}
+  m_Layer: 8
+  m_Name: plot010
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4994258881078352
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1723694486893898}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 93.15903, y: 16.386482, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114595413725594146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1723694486893898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2710d71dc4c920f4da31f058f2fde66a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plot:
+  - pause 4
+  - "say 4 \u660E\u660E\u662F\u59B9\u59B9\u521A\u4E3A\u6211\u505A\u597D\u7684\u673A\u5668\u4EBA\uFF01"
+  - "say 4 \u600E\u4E48\u529E\uFF1F"
+  - "say 2 \u611F\u8C22\u5927\u5BB6\u6765\u5230\u6211\u7684\u821E\u4F1A\u3002"
+  - "say 2 \u4E00\u76F4\u4EE5\u6765\uFF0C\u6709\u4E86\u5927\u5BB6\u7684\u5E2E\u52A9\uFF0C\u738B\u56FD\u624D\u80FD\u5982\u6B64\u548C\u5E73\u3002"
+  - "say 2 \u5E0C\u671B\u80FD\u548C\u5927\u5BB6\u4E00\u8D77\u521B\u9020\u66F4\u597D\u7684\u672A\u6765\uFF01"
+  - "say 2 \u90A3\u4E48\uFF0C\u8BF7\u5C3D\u60C5\u4EAB\u53D7\u821E\u4F1A\u5427\uFF01"

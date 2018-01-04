@@ -1,0 +1,28 @@
+<ListItems>
+    <items>
+        <Item>
+            <name>ウサミミ族</name>
+            <info>种族
+亚人目兔耳科，目前月球上的主要居民，传说是辉夜的后代。</info>
+        </Item>
+        <Item>
+            <name>ネコミミ族</name>
+            <info>种族
+亚人目猫耳科，非月球原住民，来源于宇宙空间，具体起源不详。</info>
+        </Item>
+        <Item>
+            <name>ムーン</name>
+            <info>地点
+本作发生地点，与平时印象中的月球不同，是个很热闹的地方。</info>
+        </Item>
+        <Item>
+            <name>ネコミミメイド軍団</name>
+            <info>团体
+可乐炭率领的高科技化部队的总称。</info>
+        </Item>
+        <Item>
+            <name>ジュース＝フォー</name>
+            <info>团体</info>
+        </Item>
+    </items>
+</ListItems>
