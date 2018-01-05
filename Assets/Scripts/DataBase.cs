@@ -12,18 +12,16 @@ public class DataBase : MonoBehaviour
     private int itemperscr = 10;
     private int delay = 0;
     private string[] labelname = { "Characters", "Enemies", "Endings" };
-    private string[][] item;
     private string binid;
     private bool[][] b_item;
 
-    private string[][] info;
     private int[] pos = { 0, 0, 0 };
     private int[] dispos = { 0, 0, 0 };
     private int labelpos = 0;
     private int cospos = 0;
     private int labels;
     private bool b_info = true;
-    ReadList[] rls;
+    ListItems[] liss;
 
     private List page;
 
@@ -37,19 +35,15 @@ public class DataBase : MonoBehaviour
     void Start()
     {
         labels = labelname.Length;
-        item = new string[labels][];
-        info = new string[labels][];
 
         b_item = new bool[labels][];
 
-        rls = new ReadList[labels];
+        liss = new ListItems[labels];
         for (int i = 0; i < labels; i++)
         {
             int j = i + 1;
             binid = "MENU000" + j.ToString();
-            rls[i] = new ReadList(binid);
-            item[i] = rls[i].items;
-            info[i] = rls[i].infos;
+            liss[i] = new ListItems(binid);
         }
 
         b_item[0] = GetComponent<SystemDataManager>().LoadBools("character_collection");
@@ -58,19 +52,17 @@ public class DataBase : MonoBehaviour
 
         //message lock manage    
 
-        for (int i = 0; i < item.Length; i++)
+        for (int i = 0; i < liss.Length; i++)
         {
-            string[] messages = item[i];
-            int mes_len = messages.Length;
-            if (b_item[i].Length != mes_len)
+            if (b_item[i].Length != liss[i].items.Length)
                 Debug.Log("savedata wrong.");
 
-            for (int j = 0; j < mes_len; j++)
+            for (int j = 0; j < liss[i].items.Length; j++)
             {
                 if (!b_item[i][j])
                 {
-                    item[i][j] = "???";
-                    info[i][j] = "???????";
+                    liss[i].items[j].name = "???";
+                    liss[i].items[j].info = "???????";
                 }
             }
         }
@@ -79,7 +71,7 @@ public class DataBase : MonoBehaviour
             db_list = Instantiate(listtool, transform);
             db_list.SetListPos(list_pos);
             db_list.SetInfoPos(info_pos);
-            db_list.InitText(rls[labelpos]);
+            db_list.InitText(liss[labelpos]);
         }
     }
 
@@ -94,7 +86,7 @@ public class DataBase : MonoBehaviour
             if (labelpos == -1)
                 labelpos = labels - 1;
             db_list.SetFocus(pos[labelpos]);
-            db_list.InitText(rls[labelpos]);
+            db_list.InitText(liss[labelpos]);
 
             //page.SetScroll(dispos[labelpos]);
         }
@@ -106,7 +98,7 @@ public class DataBase : MonoBehaviour
             if (labelpos == labels)
                 labelpos = 0;
             db_list.SetFocus(pos[labelpos]);
-            db_list.InitText(rls[labelpos]);
+            db_list.InitText(liss[labelpos]);
 
             //page.SetScroll(dispos[labelpos]);
         }

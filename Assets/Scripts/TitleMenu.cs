@@ -36,12 +36,12 @@ public class TitleMenu : MonoBehaviour
 
         //list
         string binid = "MENU0000";
-        ReadList rl = new ReadList(binid);
+        ListItems list = new ListItems(binid);
 
         main_menu = Instantiate(list_tool, transform);
         main_menu.SetListPos(list_pos);
         main_menu.SetInfoPos(info_pos);
-        main_menu.GetComponent<ListTool>().InitText(rl);
+        main_menu.GetComponent<ListTool>().InitText(list);
         main_menu.SetInfoAlign(TextAnchor.MiddleCenter);
     }
 

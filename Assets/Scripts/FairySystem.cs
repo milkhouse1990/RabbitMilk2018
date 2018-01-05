@@ -32,7 +32,7 @@ public class FairySystem : MonoBehaviour
     private string[] info;
     private fairy[] fys;
 
-    private ReadList rl;
+    private ListItems list;
 
     public Text text;
     private Text[] fairy_lv_bar;
@@ -53,15 +53,15 @@ public class FairySystem : MonoBehaviour
     void Awake()
     {
         string binid = "MENU0004";
-        rl = new ReadList(binid);
-        int a_fairy = rl.items.Length;
+        list = new ListItems(binid);
+        int a_fairy = list.items.Length;
 
         fairy_names = new string[a_fairy];
         info = new string[a_fairy];
         for (int i = 0; i < a_fairy; i++)
         {
-            fairy_names[i] = rl.items[i];
-            info[i] = rl.infos[i];
+            fairy_names[i] = list.items[i].name;
+            info[i] = list.items[i].info;
         }
 
 
@@ -276,15 +276,15 @@ public class FairySystem : MonoBehaviour
     {
         if (fairy_collection[i])
         {
-            rl.items[i] = fairy_names[i];
-            rl.infos[i] = info[i] + "(" + lvs[i * 2].ToString() + " + " + lvs[i * 2 + 1].ToString() + ") / " + fys[i].lv.ToString();
+            list.items[i].name = fairy_names[i];
+            list.items[i].info = info[i] + "(" + lvs[i * 2].ToString() + " + " + lvs[i * 2 + 1].ToString() + ") / " + fys[i].lv.ToString();
         }
         else
         {
-            rl.items[i] = "???";
-            rl.infos[i] = "???";
+            list.items[i].name = "???";
+            list.items[i].info = "???";
         }
-        fairy_list.GetComponent<ListTool>().InitText(rl);
+        fairy_list.GetComponent<ListTool>().InitText(list);
     }
     private void TextSetPos(Text txt, Rect pos)
     {
@@ -311,7 +311,7 @@ public class FairySystem : MonoBehaviour
         //fairy持有情况是用一个int表示的，这里把它不停/2，变成bool数组形式。
         int collection = PlayerPrefs.GetInt("Fairy", 0);
         //Debug.Log(collection);
-        int a_fairy = rl.items.Length;
+        int a_fairy = list.items.Length;
         for (int i = 0; i < a_fairy; i++)
         {
             if (collection % 2 == 1)

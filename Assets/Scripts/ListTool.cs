@@ -9,8 +9,7 @@ public class ListTool : MonoBehaviour
     private int current = 0;
     private string[] names;
 
-    private string[] items;
-    private string[] infos;
+    private ListItems lis;
 
     public bool vertical;
     public bool data;
@@ -26,11 +25,9 @@ public class ListTool : MonoBehaviour
 
     private Rect list_pos;
     private Rect info_pos;
-    public void InitText(ReadList rl)
+    public void InitText(ListItems plis)
     {
-        items = rl.items;
-        infos = rl.infos;
-        length = rl.items.Length;
+        lis = plis;
 
         if (ch_cursor == null)
         {
@@ -116,17 +113,17 @@ public class ListTool : MonoBehaviour
 
         //list
         string dis = "";
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < lis.items.Length; i++)
         {
             if (i == current)
-                dis += "<color=magenta>" + items[i] + "</color>\n";
+                dis += "<color=magenta>" + lis.items[i].name + "</color>\n";
             else
-                dis += "<color=black>" + items[i] + "</color>\n";
+                dis += "<color=black>" + lis.items[i].name + "</color>\n";
         }
         ch_list.GetComponent<Text>().text = dis;
 
         //info
-        ch_info.GetComponent<Text>().text = infos[current];
+        ch_info.GetComponent<Text>().text = lis.items[current].info;
     }
     public int GetFocus()
     {
