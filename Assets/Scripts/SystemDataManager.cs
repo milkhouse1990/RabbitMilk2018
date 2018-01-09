@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 //SystemData 系统存档类
@@ -48,7 +49,10 @@ public class SystemDataManager : MonoBehaviour
     }
     public void Create()
     {
-        string systemDataFile = "Save/systemsave.sav";
+        string systemDataFile = "Save";
+        if (!Directory.Exists(systemDataFile))
+            Directory.CreateDirectory(systemDataFile);
+        systemDataFile += "/systemsave.sav";
         systemdata = new SystemData();
 
         string dataString = xs.SerializeObject(systemdata, typeof(SystemData));

@@ -192,6 +192,10 @@ public class GridEditor : Editor
                     xs = new XmlSaver();
                     path = "Level/" + grid.scenename + ".lv";
                     levelinfo = xs.GetInfo(path, typeof(LevelInfo)) as LevelInfo;
+                    if (levelinfo == null)
+                    {
+                        levelinfo = new LevelInfo();
+                    levelinfo.Rooms=new Rect[1]{new Rect(0,12.25f,20,12.25f)}}
 
                     Camera.main.GetComponent<CameraFollow>().CameraMode = 0;
                     Camera.main.GetComponent<CameraFollow>().Rooms = levelinfo.Rooms;
