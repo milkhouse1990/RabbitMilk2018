@@ -30,6 +30,8 @@ public class LvInitiate : MonoBehaviour
         LevelInfo levelinfo = xs.GetInfo(path, typeof(LevelInfo)) as LevelInfo;
 
         Camera.main.GetComponent<CameraFollow>().CameraMode = 0;
+
+        Camera.main.GetComponent<CameraFollow>().Rooms = new Rect[levelinfo.Rooms.Length];
         Camera.main.GetComponent<CameraFollow>().Rooms = levelinfo.Rooms;
 
         foreach (LevelItem li in levelinfo.items)
@@ -52,6 +54,7 @@ public class LvInitiate : MonoBehaviour
             {
                 player.transform.position = new Vector3(x, y, 0);
                 Camera.main.GetComponent<CameraFollow>().FindCurrentRoom();
+                Camera.main.GetComponent<CameraFollow>().FollowPlayer();
             }
         }
         foreach (EventItem ei in levelinfo.events)

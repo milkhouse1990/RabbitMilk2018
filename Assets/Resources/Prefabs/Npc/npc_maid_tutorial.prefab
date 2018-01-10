@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114511347169874858}
   m_Layer: 8
   m_Name: npc_maid_tutorial
-  m_TagString: Enemy
+  m_TagString: npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

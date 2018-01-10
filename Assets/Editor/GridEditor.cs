@@ -195,9 +195,11 @@ public class GridEditor : Editor
                     if (levelinfo == null)
                     {
                         levelinfo = new LevelInfo();
-                    levelinfo.Rooms=new Rect[1]{new Rect(0,12.25f,20,12.25f)}}
+                        levelinfo.Rooms = new Rect[1] { new Rect(0, 12.25f, 20, 12.25f) };
+                    }
 
                     Camera.main.GetComponent<CameraFollow>().CameraMode = 0;
+                    Camera.main.GetComponent<CameraFollow>().Rooms = new Rect[levelinfo.Rooms.Length];
                     Camera.main.GetComponent<CameraFollow>().Rooms = levelinfo.Rooms;
 
                     foreach (LevelItem li in levelinfo.items)
@@ -212,6 +214,24 @@ public class GridEditor : Editor
                         pre.name = name;
                         pre.transform.position = new Vector3(x, y, 0);
                     }
+
+                    foreach (EventItem ei in levelinfo.events)
+                    {
+                        string tag = "Event";
+                        name = ei.name;
+                        float x = ei.x;
+                        float y = ei.y;
+
+                        loaded = Resources.Load("Prefabs\\" + tag + "\\" + name, typeof(GameObject));
+                        pre = PrefabUtility.InstantiatePrefab(loaded) as GameObject;
+                        pre.name = name;
+                        if (name == "GotoPlot")
+                            pre.GetComponent<Plot>().plotno = ei.arg;
+                        else if (name == "GotoScene")
+                            pre.GetComponent<GotoScene>().scenename = ei.arg;
+                        pre.transform.position = new Vector3(x, y, 0);
+                    }
+
                     break;
             }
         }

@@ -57,7 +57,8 @@ public class CameraFollow : MonoBehaviour
                 if (target != null)
                 {
                     // find current room
-                    CurrentRoom = FindCurrentRoom();
+                    FindCurrentRoom();
+                    FollowPlayer();
                 }
                 else
                     Debug.Log("cannot find milk.");
@@ -95,52 +96,13 @@ public class CameraFollow : MonoBehaviour
                     case through.None:
                         if (target != null)
                         {
-                            // player view
-                            // left
-                            float PlayerViewLeft = target.position.x - 10f;
-                            float RoomLeft = CurrentRoom.left;
-                            if (PlayerViewLeft < RoomLeft)
-                            {
-                                PlayerViewLeft = RoomLeft;
-                            }
-                            else
-                            {
-                                // right
-                                float PlayerViewRight = target.position.x + 10f;
-                                float RoomRight = CurrentRoom.right;
-                                if (PlayerViewRight > RoomRight)
-                                {
-                                    PlayerViewRight = RoomRight;
-                                    PlayerViewLeft = PlayerViewRight - 20f;
-                                }
-                            }
-
-                            // up
-                            float PlayerViewUp = target.position.y + ytiles / 2;
-                            float RoomUp = CurrentRoom.up;
-                            if (PlayerViewUp > RoomUp)
-                            {
-                                PlayerViewUp = RoomUp;
-                            }
-                            else
-                            {
-                                // down
-                                float PlayerViewDown = target.position.y - ytiles / 2;
-                                float RoomDown = CurrentRoom.down;
-                                if (PlayerViewDown < RoomDown)
-                                {
-                                    PlayerViewDown = RoomDown;
-                                    PlayerViewUp = PlayerViewDown + ytiles;
-                                }
-                            }
-
-                            transform.position = new Vector3(PlayerViewLeft + 10f, PlayerViewUp - ytiles / 2, -20);
+                            FollowPlayer();
 
                             // walk through right
                             if (target.position.x > CurrentRoom.right)
                             {
                                 b_through = through.Right;
-                                CurrentRoom = FindCurrentRoom();
+                                FindCurrentRoom();
                                 target.gameObject.GetComponent<Platformer2DUserControl>().enabled = false;
                                 target.gameObject.GetComponent<Physics2DM>().velocity = Vector3.zero;
                             }
@@ -148,7 +110,7 @@ public class CameraFollow : MonoBehaviour
                             if (target.position.x < CurrentRoom.left)
                             {
                                 b_through = through.Left;
-                                CurrentRoom = FindCurrentRoom();
+                                FindCurrentRoom();
                                 target.gameObject.GetComponent<Platformer2DUserControl>().enabled = false;
                                 target.gameObject.GetComponent<Physics2DM>().velocity = Vector3.zero;
                             }
@@ -162,7 +124,7 @@ public class CameraFollow : MonoBehaviour
     {
         return b_moving;
     }
-    public Rect4 FindCurrentRoom()
+    public void FindCurrentRoom()
     {
         foreach (Rect room in Rooms)
         {
@@ -173,9 +135,54 @@ public class CameraFollow : MonoBehaviour
                     if (target.position.x > room4.left)
                         if (target.position.x < room4.right)
                         {
-                            return room4;
+                            CurrentRoom = room4;
+                            return;
                         }
         }
-        return null;
+        Debug.Log("cannot find proper room.");
+        CurrentRoom = null;
+    }
+    public void FollowPlayer()
+    {
+        // player view
+        // left
+        float PlayerViewLeft = target.position.x - 10f;
+        float RoomLeft = CurrentRoom.left;
+        if (PlayerViewLeft < RoomLeft)
+        {
+            PlayerViewLeft = RoomLeft;
+        }
+        else
+        {
+            // right
+            float PlayerViewRight = target.position.x + 10f;
+            float RoomRight = CurrentRoom.right;
+            if (PlayerViewRight > RoomRight)
+            {
+                PlayerViewRight = RoomRight;
+                PlayerViewLeft = PlayerViewRight - 20f;
+            }
+        }
+
+        // up
+        float PlayerViewUp = target.position.y + ytiles / 2;
+        float RoomUp = CurrentRoom.up;
+        if (PlayerViewUp > RoomUp)
+        {
+            PlayerViewUp = RoomUp;
+        }
+        else
+        {
+            // down
+            float PlayerViewDown = target.position.y - ytiles / 2;
+            float RoomDown = CurrentRoom.down;
+            if (PlayerViewDown < RoomDown)
+            {
+                PlayerViewDown = RoomDown;
+                PlayerViewUp = PlayerViewDown + ytiles;
+            }
+        }
+
+        transform.position = new Vector3(PlayerViewLeft + 10f, PlayerViewUp - ytiles / 2, -20);
     }
 }
