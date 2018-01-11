@@ -130,7 +130,14 @@
             <y>0.5</y>
         </LevelItem>
     </items>
-    <events />
+    <events>
+        <EventItem>
+            <name>GotoScene</name>
+            <x>19.5</x>
+            <y>5.5</y>
+            <arg>Title</arg>
+        </EventItem>
+    </events>
     <Rooms>
         <Rect>
             <x>0</x>

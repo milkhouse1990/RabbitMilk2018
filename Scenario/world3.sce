@@ -1,6 +1,6 @@
 //偶像舞台
-world 3
-scene 0
+world 3 Stadium
+scene 0 Stadium
 cut 0
 果酱亲 请大家大声告诉我：全月球最可爱的人是？
 台下 果酱果酱果酱！
@@ -51,3 +51,6 @@ cut 2
 果酱P 你不必现在就答复的。我这里有一套偶像的衣服，你可以先拿回去试试。
 //获得：偶像形态
 牛奶酱 既然你要送我，那我就不客气了。对不起我很忙，回头见！
+
+cut 3
+gotoscene 7Extra0CrossRoad

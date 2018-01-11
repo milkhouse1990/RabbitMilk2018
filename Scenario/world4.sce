@@ -1,7 +1,7 @@
 //猫耳基地
-world 4
+world 4 Base
 //1111
-scene 0
+scene 0 Base
 cut 0
 公主殿下 所以，你到底为什么要抓我？
 //人类登月的故事？
@@ -36,3 +36,6 @@ boss 4
 牛奶酱 这怎么行？
 公主殿下 穿上这件衣服，你一定能够觉醒更强大的魔法，为了我们的王国，去吧!
 牛奶酱 好的！
+
+cut 3
+gotoscene 7Extra0CrossRoad

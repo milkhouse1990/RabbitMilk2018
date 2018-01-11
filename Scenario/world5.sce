@@ -1,7 +1,7 @@
 //猫耳族的太空船
-world 0
+world 0 Space
 //1111
-scene 0
+scene 0 Space
 cut 0
 可乐炭 你很厉害呢！
 牛奶酱 这还用你说。不过你还没使出全力吧？

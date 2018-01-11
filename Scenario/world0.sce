@@ -129,4 +129,4 @@ cut 1
 牛奶酱 公主殿下的声音…是从前面传来的…
 
 cut 2
-gotoscene CrossRoad
+gotoscene 7Extra0CrossRoad

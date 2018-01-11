@@ -1,7 +1,7 @@
 //迷路之森
-world 1
+world 1 Forest
 //1111
-scene 0
+scene 0 Forest
 cut 0
 //精灵登场
 //获得精灵Drop
@@ -42,3 +42,6 @@ cut 2
 //获得精灵Max
 add Fairy 1
 牛奶酱 是谁？居然偷我衣服？快还给我！
+
+cut 3
+gotoscene 7Extra0CrossRoad

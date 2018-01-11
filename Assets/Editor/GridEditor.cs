@@ -15,10 +15,12 @@ public class GridEditor : Editor
     string[][] TileNames;
     string[] catecory;
 
+    private LvInitiate ACTManager;
+
     public void OnEnable()
     {
         grid = (Grid)target;
-
+        ACTManager = GameObject.Find("ACTInit").GetComponent<LvInitiate>();
         // toolbar init
         focus = 0;
         catecory = new string[] { "Wall", "Enemy", "Npc", "Event" };
@@ -62,25 +64,6 @@ public class GridEditor : Editor
     void Update()
     {
 
-    }
-    public override void OnInspectorGUI()
-    {
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("Grid Width");
-        grid.width = EditorGUILayout.FloatField(grid.width, GUILayout.Width(50));
-        GUILayout.EndHorizontal();
-
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("Grid Height");
-        grid.height = EditorGUILayout.FloatField(grid.height, GUILayout.Width(50));
-        GUILayout.EndHorizontal();
-
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("Scene Name");
-        grid.scenename = EditorGUILayout.TextField(grid.scenename, GUILayout.Width(100));
-        GUILayout.EndHorizontal();
-
-        SceneView.RepaintAll();
     }
     void GridUpdate(SceneView sceneview)
     {
@@ -138,7 +121,7 @@ public class GridEditor : Editor
                     GameObject[] AllGameObjects = FindObjectsOfType(typeof(GameObject)) as GameObject[];
                     foreach (GameObject go in AllGameObjects)
                     {
-                        if (go.name == "grid" || go.name == "scenario")
+                        if (go.name == "grid" || go.name == "scenario" || go.name == "ACTInit")
                             continue;
                         if (go.name == "Main Camera")
                         {
@@ -178,60 +161,9 @@ public class GridEditor : Editor
                     break;
                 // load the map
                 case 'd':
-                    // clear the map
-                    AllGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
-                    foreach (GameObject go in AllGameObjects)
-                    {
-                        if (go.name == "grid" || go.name == "Main Camera" || go.name == "scenario")
-                            continue;
-                        if (go.transform.parent != null)
-                            continue;
-                        GameObject.DestroyImmediate(go);
-                    }
-                    // load the map
-                    xs = new XmlSaver();
-                    path = "Level/" + grid.scenename + ".lv";
-                    levelinfo = xs.GetInfo(path, typeof(LevelInfo)) as LevelInfo;
-                    if (levelinfo == null)
-                    {
-                        levelinfo = new LevelInfo();
-                        levelinfo.Rooms = new Rect[1] { new Rect(0, 12.25f, 20, 12.25f) };
-                    }
-
-                    Camera.main.GetComponent<CameraFollow>().CameraMode = 0;
-                    Camera.main.GetComponent<CameraFollow>().Rooms = new Rect[levelinfo.Rooms.Length];
-                    Camera.main.GetComponent<CameraFollow>().Rooms = levelinfo.Rooms;
-
-                    foreach (LevelItem li in levelinfo.items)
-                    {
-                        string tag = li.tag;
-                        name = li.name;
-                        float x = li.x;
-                        float y = li.y;
-
-                        loaded = Resources.Load("Prefabs\\" + tag + "\\" + name, typeof(GameObject));
-                        pre = PrefabUtility.InstantiatePrefab(loaded) as GameObject;
-                        pre.name = name;
-                        pre.transform.position = new Vector3(x, y, 0);
-                    }
-
-                    foreach (EventItem ei in levelinfo.events)
-                    {
-                        string tag = "Event";
-                        name = ei.name;
-                        float x = ei.x;
-                        float y = ei.y;
-
-                        loaded = Resources.Load("Prefabs\\" + tag + "\\" + name, typeof(GameObject));
-                        pre = PrefabUtility.InstantiatePrefab(loaded) as GameObject;
-                        pre.name = name;
-                        if (name == "GotoPlot")
-                            pre.GetComponent<Plot>().plotno = ei.arg;
-                        else if (name == "GotoScene")
-                            pre.GetComponent<GotoScene>().scenename = ei.arg;
-                        pre.transform.position = new Vector3(x, y, 0);
-                    }
-
+                    ACTManager.Clear();
+                    ACTManager.ThisLevel = grid.scenename;
+                    ACTManager.LoadLevel();
                     break;
             }
         }

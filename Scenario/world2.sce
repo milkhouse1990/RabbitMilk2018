@@ -1,7 +1,7 @@
 //高速公路
-world 2
+world 2 Highway
 //1111
-scene 0
+scene 0 Highway
 cut 0
 声音A 果酱 果酱果酱果酱 果酱果酱果酱 果酱果酱果酱…
 声音B 你好烦啊，能不能闭上你的臭嘴。
@@ -43,3 +43,6 @@ cut 1
 //变大！！！！
 草莓汁 变成了巨大的…
 牛奶酱 马赛克。
+
+cut 3
+gotoscene 7Extra0CrossRoad

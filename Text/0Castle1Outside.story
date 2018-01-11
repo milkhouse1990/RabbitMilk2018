@@ -299,7 +299,7 @@
                 <Line>
                     <args>
                         <string>gotoscene</string>
-                        <string>CrossRoad</string>
+                        <string>7Extra0CrossRoad</string>
                     </args>
                 </Line>
             </contents>
