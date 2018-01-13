@@ -13,8 +13,6 @@ public class TitleMenuMoon : MonoBehaviour
     public Rect info_pos;
     public Rect title_pos;
 
-    private List page;
-
     private string info;
 
     // Use this for initialization
@@ -36,7 +34,6 @@ public class TitleMenuMoon : MonoBehaviour
     {
         GUI.Label(title_pos, "Moon Story Ver. 201709");
         GUI.Label(info_pos, "PRESS START BUTTON");
-        page.Display();
     }
 
 }

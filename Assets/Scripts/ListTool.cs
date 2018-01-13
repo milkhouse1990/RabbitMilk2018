@@ -6,18 +6,15 @@ using UnityEngine.UI;
 public class ListTool : MonoBehaviour
 {
     private int[] bag = new int[50];
-    private int current = 0;
+    public int current = 0;
     private string[] names;
 
+    public string binid;
     private ListItems lis;
 
     public bool vertical;
     public bool data;
     private int length;
-
-    public Transform cursor;
-    public Transform list;
-    public Transform info;
 
     private Transform ch_cursor;
     private Transform ch_list;
@@ -25,40 +22,27 @@ public class ListTool : MonoBehaviour
 
     private Rect list_pos;
     private Rect info_pos;
+
     public void InitText(ListItems plis)
     {
         lis = plis;
-
-        if (ch_cursor == null)
-        {
-            ch_cursor = Instantiate(cursor, transform);
-
-            ch_list = Instantiate(list, transform);
-            RectTransform rt = ch_list.GetComponent<RectTransform>();
-            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, list_pos.x, list_pos.width);
-            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, list_pos.y, list_pos.height);
-
-            ch_info = Instantiate(info, transform);
-            rt = ch_info.GetComponent<RectTransform>();
-            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, info_pos.x, info_pos.width);
-            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, info_pos.y, info_pos.height);
-
-        }
-
         ListUpdate();
+    }
+    void Awake()
+    {
+        ch_cursor = transform.Find("cursor");
+        ch_list = transform.Find("List");
+        ch_info = transform.Find("info");
     }
     // Use this for initialization
     void Start()
     {
+        lis = new ListItems(binid);
         if (data)
             length = 3;
+        ListUpdate();
     }
 
-    void Awaken()
-    {
-        //ch_item_name = GameObject.Find("item_name");
-        //ch_cursor = GameObject.Find("cursor");
-    }
     // Update is called once per frame
     void Update()
     {
@@ -69,7 +53,7 @@ public class ListTool : MonoBehaviour
             {
                 current--;
                 if (current < 0)
-                    current = length - 1;
+                    current = lis.items.Length - 1;
                 //Debug.Log(current);
                 if (!data)
                     ListUpdate();
@@ -78,7 +62,7 @@ public class ListTool : MonoBehaviour
             if (Input.GetButtonDown("down"))
             {
                 current++;
-                if (current == length)
+                if (current == lis.items.Length)
                     current = 0;
                 //Debug.Log(current);
                 if (!data)
@@ -123,7 +107,8 @@ public class ListTool : MonoBehaviour
         ch_list.GetComponent<Text>().text = dis;
 
         //info
-        ch_info.GetComponent<Text>().text = lis.items[current].info;
+        if (ch_info != null)
+            ch_info.GetComponent<Text>().text = lis.items[current].info;
     }
     public int GetFocus()
     {

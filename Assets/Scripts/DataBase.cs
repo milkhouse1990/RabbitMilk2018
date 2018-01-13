@@ -23,7 +23,6 @@ public class DataBase : MonoBehaviour
     private bool b_info = true;
     ListItems[] liss;
 
-    private List page;
 
     public Rect list_pos;
     public Rect info_pos;

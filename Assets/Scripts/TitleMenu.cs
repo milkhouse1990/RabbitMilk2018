@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class TitleMenu : MonoBehaviour
 {
 
-    private List page;
     //private GameObject title_menu;
 
     private string info;
@@ -17,10 +16,7 @@ public class TitleMenu : MonoBehaviour
     private GameObject DataBaseMenu;
     private bool pause = false;
 
-    public ListTool list_tool;
-    private ListTool main_menu;
-    public Rect list_pos;
-    public Rect info_pos;
+    private GameObject main_menu;
 
     // Use this for initialization
     void Start()
@@ -35,14 +31,7 @@ public class TitleMenu : MonoBehaviour
         DataBaseMenu.SetActive(false);
 
         //list
-        string binid = "MENU0000";
-        ListItems list = new ListItems(binid);
-
-        main_menu = Instantiate(list_tool, transform);
-        main_menu.SetListPos(list_pos);
-        main_menu.SetInfoPos(info_pos);
-        main_menu.GetComponent<ListTool>().InitText(list);
-        main_menu.SetInfoAlign(TextAnchor.MiddleCenter);
+        main_menu = transform.Find("MainMenu").gameObject;
     }
 
     // Update is called once per frame
@@ -56,7 +45,7 @@ public class TitleMenu : MonoBehaviour
                 pause = false;
                 farm_menu.SetActive(false);
                 DataBaseMenu.SetActive(false);
-                main_menu.gameObject.SetActive(true);
+                main_menu.SetActive(true);
             }
 
         }
@@ -79,12 +68,12 @@ public class TitleMenu : MonoBehaviour
                     case 2:
                         pause = true;
                         DataBaseMenu.SetActive(true);
-                        main_menu.gameObject.SetActive(false);
+                        main_menu.SetActive(false);
                         break;
                     case 1:
                         pause = true;
                         farm_menu.SetActive(true);
-                        main_menu.gameObject.SetActive(false);
+                        main_menu.SetActive(false);
                         break;
                     case 4:
                         PlayerPrefs.DeleteAll();
