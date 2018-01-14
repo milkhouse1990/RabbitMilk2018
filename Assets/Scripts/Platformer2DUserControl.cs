@@ -45,6 +45,7 @@ public class Platformer2DUserControl : MonoBehaviour
     public GameObject pause_menu;
     private GameObject co_act_menu;
     private GameObject co_pause_menu;
+    private GameObject mapCanvas;
 
     void Start()
     {
@@ -58,6 +59,9 @@ public class Platformer2DUserControl : MonoBehaviour
     {
         m_Character = GetComponent<PlatformerCharacter2D>();
         m_Status = GetComponent<Status>();
+
+        mapCanvas = transform.Find("MapCanvas").gameObject;
+        mapCanvas.SetActive(false);
     }
 
 
@@ -154,7 +158,10 @@ public class Platformer2DUserControl : MonoBehaviour
                     m_Jump = Input.GetButtonDown("B");
                 }
                 if (Input.GetButtonDown("SELECT"))
-                    SceneManager.LoadScene("Title");
+                {
+                    pause = true;
+                    mapCanvas.gameObject.SetActive(true);
+                }
 
                 if (!b_Jump)
                     b_Jump = Input.GetButtonUp("B");

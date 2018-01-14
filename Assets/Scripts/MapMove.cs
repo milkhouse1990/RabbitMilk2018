@@ -23,7 +23,7 @@ public class MapMove : MonoBehaviour
         dataMenu = transform.Find("DataMenu").gameObject;
         dataMenu.SetActive(false);
 
-        dataCanvas = transform.Find("DataCanvas").gameObject;
+        dataCanvas = transform.Find("DiaryBook").gameObject;
         dataCanvas.SetActive(false);
     }
 
@@ -54,12 +54,19 @@ public class MapMove : MonoBehaviour
             if (Input.GetButtonDown("A"))
                 switch (dataMenu.GetComponent<ListTool>().current)
                 {
+                    // save
                     case 0:
                         dataMenu.SetActive(false);
                         dataCanvas.SetActive(true);
+                        dataCanvas.GetComponent<DiaryBook>().SetSaveFlag(true);
                         break;
+                    // load
                     case 1:
+                        dataMenu.SetActive(false);
+                        dataCanvas.SetActive(true);
+                        dataCanvas.GetComponent<DiaryBook>().SetSaveFlag(false);
                         break;
+                    // title
                     case 2:
                         SceneManager.LoadScene("Title");
                         break;

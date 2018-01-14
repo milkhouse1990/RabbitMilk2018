@@ -5,49 +5,40 @@ using UnityEngine.SceneManagement;
 
 public class TitleMenu : MonoBehaviour
 {
-
-    //private GameObject title_menu;
-
-    private string info;
-
-    public GameObject data_canvas;
-    private GameObject farm_menu;
-    public GameObject DataBaseCanvas;
+    private GameObject diaryBook;
     private GameObject DataBaseMenu;
-    private bool pause = false;
 
     private GameObject main_menu;
+
+    void Awake()
+    {
+        main_menu = transform.Find("MainMenu").gameObject;
+
+        diaryBook = transform.Find("DiaryBook").gameObject;
+        diaryBook.SetActive(false);
+
+        DataBaseMenu = transform.Find("DataBaseCanvas").gameObject;
+        DataBaseMenu.SetActive(false);
+    }
 
     // Use this for initialization
     void Start()
     {
         PlayerPrefs.DeleteAll();
-
-        farm_menu = Instantiate(data_canvas);
-        farm_menu.GetComponentInChildren<GameDataManager>().save_flag = false;
-        farm_menu.SetActive(false);
-
-        DataBaseMenu = Instantiate(DataBaseCanvas);
-        DataBaseMenu.SetActive(false);
-
-        //list
-        main_menu = transform.Find("MainMenu").gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
         //deactive
-        if (pause)
+        if (!main_menu.activeInHierarchy)
         {
             if (Input.GetButtonDown("B"))
             {
-                pause = false;
-                farm_menu.SetActive(false);
+                diaryBook.SetActive(false);
                 DataBaseMenu.SetActive(false);
                 main_menu.SetActive(true);
             }
-
         }
         else
         {
@@ -66,13 +57,12 @@ public class TitleMenu : MonoBehaviour
                         }
                         break;
                     case 2:
-                        pause = true;
                         DataBaseMenu.SetActive(true);
                         main_menu.SetActive(false);
                         break;
                     case 1:
-                        pause = true;
-                        farm_menu.SetActive(true);
+                        diaryBook.SetActive(true);
+                        diaryBook.GetComponent<DiaryBook>().SetSaveFlag(false);
                         main_menu.SetActive(false);
                         break;
                     case 4:

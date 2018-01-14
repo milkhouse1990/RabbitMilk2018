@@ -35,7 +35,7 @@ public class GameDataManager : MonoBehaviour
 {
     private string dataFileName = "save";//存档文件的名称,自己定//
     private XmlSaver xs = new XmlSaver();
-    private RectTransform[] go_datainfo;
+    private Transform[] go_datainfo;
 
     public GameData gameData;
 
@@ -57,32 +57,18 @@ public class GameDataManager : MonoBehaviour
         go_datainfo = new RectTransform[3];
         for (int i = 0; i < 3; i++)
         {
-            go_datainfo[i] = Instantiate(datainfo, transform);
-            go_datainfo[i].localPosition = new Vector2(85, 220 - 220 * i);
+            // go_datainfo[i] = transform.Find("datainfo" + i.ToString());
+            // go_datainfo[i].localPosition = new Vector2(85, 220 - 220 * i);
         }
 
         gameData = new GameData();
 
         //设定密钥，根据具体平台设定//
         gameData.key = SystemInfo.deviceUniqueIdentifier;
-        for (int i = 0; i < 3; i++)
-            Check(i);
+
     }
     void Update()
     {
-        if (Input.GetButtonDown("A"))
-        {
-            int current = GetComponent<ListTool>().GetFocus();
-            if (save_flag)
-            {
-                Save(current);
-                Check(current);
-            }
-            else
-            {
-                Load(current);
-            }
-        }
     }
 
 

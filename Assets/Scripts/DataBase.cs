@@ -67,9 +67,7 @@ public class DataBase : MonoBehaviour
         }
 
         {
-            db_list = Instantiate(listtool, transform);
-            db_list.SetListPos(list_pos);
-            db_list.SetInfoPos(info_pos);
+            db_list = transform.Find("ListTool").GetComponent<ListTool>();
             db_list.InitText(liss[labelpos]);
         }
     }

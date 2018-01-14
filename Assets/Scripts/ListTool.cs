@@ -30,8 +30,8 @@ public class ListTool : MonoBehaviour
     }
     void Awake()
     {
-        ch_cursor = transform.Find("cursor");
         ch_list = transform.Find("List");
+        ch_cursor = ch_list.Find("cursor");
         ch_info = transform.Find("info");
     }
     // Use this for initialization
@@ -92,8 +92,8 @@ public class ListTool : MonoBehaviour
         int space = 35;
         RectTransform rt = ch_cursor.GetComponent<RectTransform>();
 
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, list_pos.x - 30, 30);
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, list_pos.y + current * space, 30);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, -30, 30);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, current * space, 30);
 
         //list
         string dis = "";
