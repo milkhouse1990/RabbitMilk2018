@@ -1,6 +1,17 @@
 using System;
 using UnityEngine;
 
+// 这个类用来记录玩家是否具备某种能力
+public class Ability
+{
+    public bool Jump;
+    public bool DoubleJump;
+    public Ability(bool pJump, bool pDoubleJump)
+    {
+        Jump = pJump;
+        DoubleJump = pDoubleJump;
+    }
+}
 public class PlatformerCharacter2D : MonoBehaviour
 {
     public Transform milk_die;
@@ -38,10 +49,9 @@ public class PlatformerCharacter2D : MonoBehaviour
     private bool OnRamp = false;
 
     //ability
-    private bool a_doublejump;
+    private Ability ability;
 
     private int invincible = 0;
-    private bool a_jump;
 
     private int counter_attack = -1;//FROM attack action start TO attack action end
 
@@ -160,7 +170,7 @@ public class PlatformerCharacter2D : MonoBehaviour
             }
         }
         // If the player should jump...
-        if (a_jump)
+        if (ability.Jump)
             if (mp2.mGrounded && jump)// && m_Anim.GetBool("Ground"))
             {
                 // Add a vertical force to the player.
@@ -169,7 +179,7 @@ public class PlatformerCharacter2D : MonoBehaviour
                 m_Anim.SetBool("Ground", false);
                 mp2.velocity = new Vector2(mp2.velocity.x, jump_velocity);
             }
-            else if (a_doublejump)
+            else if (ability.DoubleJump)
                 if (!mp2.mGrounded && jump && !double_jump)
                 {
                     mp2.velocity = new Vector2(mp2.velocity.x, jump_velocity);
@@ -199,17 +209,13 @@ public class PlatformerCharacter2D : MonoBehaviour
         {
             case 0:
                 m_MaxSpeed = 10f;
-                a_jump = true;
-                a_doublejump = true;
-                //print(a_jump);
+                ability = new Ability(true, true);
                 break;
             case 1:
-                a_jump = true;
-                a_doublejump = false;
+                ability = new Ability(true, false);
                 break;
             case 5:
-                a_jump = false;
-                a_doublejump = false;
+                ability = new Ability(false, false);
                 break;
             case 6:
                 //if (m_Crouch)
@@ -217,8 +223,7 @@ public class PlatformerCharacter2D : MonoBehaviour
                 m_MaxSpeed = 15f;
                 //speed = 16;
                 //motion = 0;
-                a_jump = true;
-                a_doublejump = true;
+                ability = new Ability(true, true);
 
                 Instantiate(clothes, transform.position, transform.rotation);
                 //}

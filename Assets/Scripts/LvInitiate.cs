@@ -56,7 +56,7 @@ public class LvInitiate : MonoBehaviour
         GameObject[] AllGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
         foreach (GameObject go in AllGameObjects)
         {
-            if (go.name == "grid" || go.name == "Main Camera" || go.name == "scenario" || go.name == "ACTInit")
+            if (go.name == "grid" || go.name == "Main Camera" || go.name == "scenario" || go.name == "ACTInit" || go.name == "Background")
                 continue;
             if (go.transform.parent != null)
                 continue;
@@ -88,10 +88,13 @@ public class LvInitiate : MonoBehaviour
                 levelinfo.Rooms = new Rect[1] { new Rect(0, 12.25f, 20, 12.25f) };
             }
 
+        // 读入关卡配置
         Camera.main.GetComponent<CameraFollow>().CameraMode = 0;
 
         Camera.main.GetComponent<CameraFollow>().Rooms = new Rect[levelinfo.Rooms.Length];
         Camera.main.GetComponent<CameraFollow>().Rooms = levelinfo.Rooms;
+        if (player != null)
+            Camera.main.GetComponent<CameraFollow>().target = player.transform;
 
         foreach (LevelItem li in levelinfo.items)
         {
@@ -110,6 +113,16 @@ public class LvInitiate : MonoBehaviour
             float x = ei.x;
             float y = ei.y;
             string arg = ei.arg;
+
+            LoadTile(tag, name, x, y, arg);
+        }
+        foreach (Background background in levelinfo.backgrounds)
+        {
+            string tag = "Background";
+            string name = background.name;
+            float x = background.x;
+            float y = background.y;
+            string arg = "";
 
             LoadTile(tag, name, x, y, arg);
         }

@@ -29,14 +29,27 @@ public class EventItem
         arg = "null";
     }
 }
+public class Background
+{
+    public string name;
+    public float x;
+    public float y;
+    public Background()
+    {
+
+    }
+}
+// 这个类用来保存关卡配置
 public class LevelInfo
 {
     public List<LevelItem> items;
     public List<EventItem> events;
     public Rect[] Rooms;
+    public List<Background> backgrounds;
     public LevelInfo()
     {
         items = new List<LevelItem>();
         events = new List<EventItem>();
+        backgrounds = new List<Background>();
     }
 }

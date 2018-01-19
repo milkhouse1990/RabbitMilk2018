@@ -142,6 +142,20 @@ public class GridEditor : Editor
                                 ei.arg = go.GetComponent<GotoScene>().scenename;
                             levelinfo.events.Add(ei);
                         }
+                        else if (go.name == "Background")
+                        {
+                            SpriteRenderer[] spriteRenderers = go.GetComponentsInChildren<SpriteRenderer>();
+                            foreach (SpriteRenderer spriteRenderer in spriteRenderers)
+                            {
+                                Background background = new Background();
+
+                                background.name = spriteRenderer.name;
+                                background.x = spriteRenderer.transform.position.x;
+                                background.y = spriteRenderer.transform.position.y;
+
+                                levelinfo.backgrounds.Add(background);
+                            }
+                        }
                         else
                         {
                             LevelItem li = new LevelItem();

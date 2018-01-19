@@ -44,7 +44,7 @@ public class CameraFollow : MonoBehaviour
     private int i = 0;
     private through b_through = through.None;
     private bool b_moving = false;
-    private Transform target = null;
+    public Transform target = null;
 
     private Rect view_range;
     // Use this for initialization
