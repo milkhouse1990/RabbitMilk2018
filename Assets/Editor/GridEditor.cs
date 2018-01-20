@@ -20,7 +20,7 @@ public class GridEditor : Editor
     public void OnEnable()
     {
         grid = (Grid)target;
-        ACTManager = GameObject.Find("ACTInit").GetComponent<LvInitiate>();
+        ACTManager = GameObject.Find("ACTManager").GetComponent<LvInitiate>();
         // toolbar init
         focus = 0;
         catecory = new string[] { "Wall", "Enemy", "Npc", "Event" };

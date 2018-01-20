@@ -7,13 +7,20 @@ using UnityEngine.UI;
 public class MapMove : MonoBehaviour
 {
 
-    private int place = 0;
     private Transform milk;
     private Text PlaceInfo;
 
     private GameObject dataMenu;
 
     private GameObject dataCanvas;
+
+    private Transform placesTransform;
+    public int placeProgress = 0;
+
+    void Awake()
+    {
+        placesTransform = transform.Find("Places");
+    }
     // Use this for initialization
     void Start()
     {
@@ -42,9 +49,28 @@ public class MapMove : MonoBehaviour
                 milk.position += Vector3.left * MoveVelocityScalar;
             if (Input.GetButton("right"))
                 milk.position += Vector3.right * MoveVelocityScalar;
-            if (Input.GetButtonDown("A"))
-                if (place == 1)
-                    SceneManager.LoadScene("Palace_demo");
+
+            // check which place is arrived
+            string[] displayedNames = { "PRINCESS CASTLE", "PUZZLING FOREST", "HIGHWAY", "JELLY'S STADIUM", "COLA'S SECRET BASE", "SPACESHIP", "SECRET SHOP" };
+            int place = 0;
+            PlaceInfo.text = "";
+            ColliderBox[] colliderBoxes = placesTransform.GetComponentsInChildren<ColliderBox>();
+            foreach (ColliderBox colliderBox in colliderBoxes)
+            {
+                if (colliderBox.CheckIn(milk.position))
+                {
+                    PlaceInfo.text = displayedNames[place] + "\nfairy=1/1 data=0/0";
+                    break;
+                }
+                place++;
+            }
+            // enter
+            string[] sceneNames = { "0Castle1Outside", "1Forest0Forest", "2Highway0Highway", "3Stadium0Stadium", "4Base0Base", "5Space0Space" };
+            if (Input.GetButtonDown("A") && place < colliderBoxes.Length)
+            {
+                GetComponentInParent<LvInitiate>().ReloadMap(sceneNames[place]);
+                gameObject.SetActive(false);
+            }
             if (Input.GetButtonDown("X"))
                 dataMenu.gameObject.SetActive(true);
         }
@@ -83,15 +109,14 @@ public class MapMove : MonoBehaviour
                 dataCanvas.SetActive(false);
         }
 
-        if (milk.position.x < 2)
+    }
+    public void AddPlace(int updateProgress)
+    {
+        while (updateProgress > placeProgress)
         {
-            place = 1;
-            PlaceInfo.text = "CASTLE\nfairy=1/1 data=0/0";
-        }
-        else
-        {
-            place = 0;
-            PlaceInfo.text = "";
+            placeProgress++;
+            GameObject go = Resources.Load("UI/" + "Place" + placeProgress.ToString()) as GameObject;
+            Instantiate(go, placesTransform);
         }
     }
 }

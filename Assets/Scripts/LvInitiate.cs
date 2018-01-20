@@ -12,7 +12,16 @@ public class LvInitiate : MonoBehaviour
     private Story story;
     public string ThisLevel;
     public string LastLevel;
-    // Use this for initialization
+
+    // UI
+    private GameObject mapCanvas;
+    private bool pause = false;
+
+    void Awake()
+    {
+        mapCanvas = transform.Find("MapCanvas").gameObject;
+        mapCanvas.SetActive(false);
+    }
     void OnEnable()
     {
         if (!DebugMode)
@@ -27,6 +36,9 @@ public class LvInitiate : MonoBehaviour
         else
         {
             ThisLevel = GameObject.Find("grid").GetComponent<Grid>().scenename;
+            player = GameObject.Find("milk");
+            if (!player)
+                Debug.Log("cannot find milk.");
             LoadStory();
         }
     }
@@ -34,7 +46,40 @@ public class LvInitiate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // activate map canvas
+        if (!mapCanvas.activeInHierarchy && Input.GetButtonDown("SELECT"))
+        {
+            pause = true;
+            mapCanvas.SetActive(true);
+        }
+    }
+    void FixedUpdate()
+    {
+        // check plot
+        Plot[] plots = FindObjectsOfType<Plot>() as Plot[];
+        foreach (Plot plot in plots)
+        {
+            if (player.transform.position.x > plot.transform.position.x)
+            {
+                if (plot.name == "GotoPlot")
+                {
+                    string binid = "PLOT" + plot.plotno;
+                    player.GetComponent<Platformer2DUserControl>().EnterAVGMode(binid);
+                    GameObject.Destroy(plot.gameObject);
+                    break;
+                }
+                else if (plot.name == "GotoScene")
+                    SceneManager.LoadScene(plot.plotno);
+                else if (plot.name == "GotoMap")
+                {
+                    mapCanvas.SetActive(true);
+                    int temp;
+                    int.TryParse(plot.plotno, out temp);
+                    mapCanvas.GetComponent<MapMove>().AddPlace(temp);
+                }
+            }
 
+        }
     }
     private void LoadMap(string MapName)
     {
@@ -56,7 +101,7 @@ public class LvInitiate : MonoBehaviour
         GameObject[] AllGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
         foreach (GameObject go in AllGameObjects)
         {
-            if (go.name == "grid" || go.name == "Main Camera" || go.name == "scenario" || go.name == "ACTInit" || go.name == "Background")
+            if (go.name == "grid" || go.name == "Main Camera" || go.name == "scenario" || go.name == "ACTManager" || go.name == "Background")
                 continue;
             if (go.transform.parent != null)
                 continue;

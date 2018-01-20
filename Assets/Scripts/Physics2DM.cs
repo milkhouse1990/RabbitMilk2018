@@ -114,24 +114,5 @@ public class Physics2DM : MonoBehaviour
 
             }
         }
-        // check plot
-        Plot[] plots = FindObjectsOfType<Plot>() as Plot[];
-        foreach (Plot plot in plots)
-        {
-            if (transform.position.x > plot.transform.position.x)
-            {
-                if (plot.name == "GotoPlot")
-                {
-                    string binid = "PLOT" + plot.plotno;
-                    GetComponent<Platformer2DUserControl>().EnterAVGMode(binid);
-                    GameObject.Destroy(plot.gameObject);
-                    break;
-                }
-                else if (plot.name == "GotoScene")
-                    SceneManager.LoadScene(plot.plotno);
-            }
-
-        }
-
     }
 }

@@ -59,6 +59,7 @@ public class PlatformerCharacter2D : MonoBehaviour
     private float jump_velocity = 12;
     void Start()
     {
+        CostumeChange(0);
         OldPosition = transform.position;
         for (int i = 0; i < 3; i++)
         {
