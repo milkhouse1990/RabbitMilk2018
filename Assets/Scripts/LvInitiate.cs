@@ -14,16 +14,15 @@ public class LvInitiate : MonoBehaviour
     public string LastLevel;
 
     // UI
-    private GameObject mapCanvas;
     private bool pause = false;
 
-    void Awake()
+    void Start()
     {
-        mapCanvas = transform.Find("MapCanvas").gameObject;
-        mapCanvas.SetActive(false);
-    }
-    void OnEnable()
-    {
+        player = GameObject.Find("milk");
+        if (!player)
+            Debug.Log("cannot find milk.");
+        GetComponentInParent<ModeSwitch>().player = player;
+
         if (!DebugMode)
         {
             scenename = PlayerPrefs.GetString("SceneName");
@@ -36,9 +35,7 @@ public class LvInitiate : MonoBehaviour
         else
         {
             ThisLevel = GameObject.Find("grid").GetComponent<Grid>().scenename;
-            player = GameObject.Find("milk");
-            if (!player)
-                Debug.Log("cannot find milk.");
+            GetComponent<ModeSwitch>().EnterMode("act");
             LoadStory();
         }
     }
@@ -46,41 +43,9 @@ public class LvInitiate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // activate map canvas
-        if (!mapCanvas.activeInHierarchy && Input.GetButtonDown("SELECT"))
-        {
-            pause = true;
-            mapCanvas.SetActive(true);
-        }
-    }
-    void FixedUpdate()
-    {
-        // check plot
-        Plot[] plots = FindObjectsOfType<Plot>() as Plot[];
-        foreach (Plot plot in plots)
-        {
-            if (player.transform.position.x > plot.transform.position.x)
-            {
-                if (plot.name == "GotoPlot")
-                {
-                    string binid = "PLOT" + plot.plotno;
-                    player.GetComponent<Platformer2DUserControl>().EnterAVGMode(binid);
-                    GameObject.Destroy(plot.gameObject);
-                    break;
-                }
-                else if (plot.name == "GotoScene")
-                    SceneManager.LoadScene(plot.plotno);
-                else if (plot.name == "GotoMap")
-                {
-                    mapCanvas.SetActive(true);
-                    int temp;
-                    int.TryParse(plot.plotno, out temp);
-                    mapCanvas.GetComponent<MapMove>().AddPlace(temp);
-                }
-            }
 
-        }
     }
+
     private void LoadMap(string MapName)
     {
         LastLevel = ThisLevel;
@@ -174,7 +139,7 @@ public class LvInitiate : MonoBehaviour
     }
     private void LoadTile(string tag, string name, float x, float y, string arg)
     {
-        if (tag != "Player" || (tag == "Player" && player == null))
+        if (tag != "Player")
         {
             GameObject pre;
             if (DebugMode)
@@ -205,6 +170,7 @@ public class LvInitiate : MonoBehaviour
             player.transform.position = new Vector3(x, y, 0);
             Camera.main.GetComponent<CameraFollow>().FindCurrentRoom();
             Camera.main.GetComponent<CameraFollow>().FollowPlayer();
+            GetComponent<ModeSwitch>().EnterMode("act");
         }
     }
     // load story
@@ -228,4 +194,5 @@ public class LvInitiate : MonoBehaviour
         Debug.Log("cannot load " + cutno + " .");
         return null;
     }
+
 }

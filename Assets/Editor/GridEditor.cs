@@ -121,7 +121,7 @@ public class GridEditor : Editor
                     GameObject[] AllGameObjects = FindObjectsOfType(typeof(GameObject)) as GameObject[];
                     foreach (GameObject go in AllGameObjects)
                     {
-                        if (go.name == "grid" || go.name == "scenario" || go.name == "ACTInit")
+                        if (go.name == "grid" || go.name == "scenario" || go.name == "ACTManager")
                             continue;
                         if (go.name == "Main Camera")
                         {
@@ -140,6 +140,8 @@ public class GridEditor : Editor
                                 ei.arg = go.GetComponent<Plot>().plotno;
                             else if (go.name == "GotoScene")
                                 ei.arg = go.GetComponent<GotoScene>().scenename;
+                            else if (go.name == "GotoMap")
+                                ei.arg = go.GetComponent<Plot>().plotno;
                             levelinfo.events.Add(ei);
                         }
                         else if (go.name == "Background")

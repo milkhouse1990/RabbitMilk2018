@@ -22,7 +22,7 @@ public class GotoScene : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            GameObject act_init = GameObject.Find("ACTInit");
+            GameObject act_init = GameObject.Find("ACTManager");
             if (act_init == null)
                 act_init = Instantiate(pre_act_init);
             act_init.GetComponent<LvInitiate>().ReloadMap(scenename);

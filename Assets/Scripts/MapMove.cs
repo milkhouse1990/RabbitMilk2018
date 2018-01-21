@@ -69,7 +69,6 @@ public class MapMove : MonoBehaviour
             if (Input.GetButtonDown("A") && place < colliderBoxes.Length)
             {
                 GetComponentInParent<LvInitiate>().ReloadMap(sceneNames[place]);
-                gameObject.SetActive(false);
             }
             if (Input.GetButtonDown("X"))
                 dataMenu.gameObject.SetActive(true);

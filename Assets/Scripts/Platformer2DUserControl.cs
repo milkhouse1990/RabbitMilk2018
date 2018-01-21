@@ -42,17 +42,13 @@ public class Platformer2DUserControl : MonoBehaviour
     private int c_stun = 0;
     private bool b_back_left;
     public GameObject act_menu;
-    public GameObject pause_menu;
     private GameObject co_act_menu;
-    private GameObject co_pause_menu;
 
     void Start()
     {
         co_act_menu = Instantiate(act_menu);
         co_act_menu.name = "player_hp_gauge";
         co_act_menu.SetActive(true);
-        co_pause_menu = Instantiate(pause_menu);
-        co_pause_menu.SetActive(false);
     }
     private void Awake()
     {
@@ -64,38 +60,7 @@ public class Platformer2DUserControl : MonoBehaviour
     private void Update()
     {
         //pause
-        if (Input.GetButtonDown("START"))
-        {
-            pause = !pause;
-            co_pause_menu.SetActive(pause);
-            //co_act_menu.SetActive(!pause);
-            //GetComponent<PauseMenu>().enabled = true;
-            if (!pause)
-            {
-                FairySystem fairy = co_pause_menu.transform.Find("FairySystem").GetComponent<FairySystem>();
-                if (fairy.GetEquip() == 0)
-                {
-                    GetComponent<Status>().SetHPMax(16 + fairy.GetLvA(0));
-                }
-                else
-                    GetComponent<Status>().SetHPMax(16);
-                if (fairy.GetEquip() == 1)
-                {
-                    PlayerPrefs.SetInt("DropHeart", 5 * fairy.GetLvA(1));
-                    PlayerPrefs.SetInt("DropCrystal", 5 * fairy.GetLvB(1));
-                }
-                else
-                {
-                    PlayerPrefs.SetInt("DropHeart", 0);
-                    PlayerPrefs.SetInt("DropCrystal", 0);
-                }
-            }
-            else
-            {
-                //FairySystem fairy = co_pause_menu.transform.Find("FairySystem").GetComponent<FairySystem>();
-                // fairy.CrystalUpdate();
-            }
-        }
+
         if (pause)
             Time.timeScale = 0;
         else
@@ -113,19 +78,7 @@ public class Platformer2DUserControl : MonoBehaviour
             else
             {
                 Time.timeScale = 1;
-                if (Input.GetButtonDown("up"))
-                {
-                    Npc[] npcs = FindObjectsOfType<Npc>() as Npc[];
-                    foreach (Npc npc in npcs)
-                    {
-                        if (npc.CheckIn(GetComponent<ColliderBox>()))
-                        {
-                            string binid = "NPC" + npc.npcno;
-                            EnterAVGMode(binid);
-                            break;
-                        }
-                    }
-                }
+
 
                 if (Input.GetButtonDown("X"))
                 {
@@ -340,16 +293,7 @@ public class Platformer2DUserControl : MonoBehaviour
                 GUI.Label(new Rect(screenpos.x - 24, screenpos.y + 32, 64, 64), waitnpc);
     }
 
-    public void EnterAVGMode(string binid)
-    {
-        GetComponent<AvgEngine>().Open(binid);
-        GetComponent<AvgEngine>().enabled = true;
-        GetComponent<AvgEngineInput>().enabled = true;
-        enabled = false;
-        //GetComponent<hp_gauge>().enabled = false;
-        m_Character.mp2.velocity = new Vector2(0, 0);
-        m_Character.Move(0, false, false, true);
-    }
+
     public void MeetEnemy(GameObject teki)
     {
         if (m_Character.GetInvincible() == 0)

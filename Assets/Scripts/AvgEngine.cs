@@ -9,7 +9,6 @@ public class AvgEngine : MonoBehaviour
 {
 
     public GameObject canvas;
-    private GameObject co_canvas;
     public Texture2D icon;
     public Texture2D icon_milk;
     public Texture2D frame;
@@ -44,14 +43,10 @@ public class AvgEngine : MonoBehaviour
     {
         warning_logo = false;
         can_skip = true;
-        co_canvas.SetActive(true);
     }
     void Awake()
     {
-        co_canvas = Instantiate(canvas);
-        co_canvas.name = "AVGCanvas";
-        co_canvas.SetActive(false);
-        act_init = GameObject.Find("ACTInit");
+        act_init = GameObject.Find("ACTManager");
     }
 
     // Update is called once per frame
@@ -195,7 +190,7 @@ public class AvgEngine : MonoBehaviour
                     //plot plotno
                     //执行PLOT[plotno].txt指定的脚本
                     case "plot":
-                        GetComponent<Platformer2DUserControl>().EnterAVGMode("PLOT" + para[1]);
+                        GetComponent<AvgEngine>().Open("PLOT" + para[1]);
                         can_skip = false;
                         break;
 
@@ -220,10 +215,7 @@ public class AvgEngine : MonoBehaviour
                             words += para[j];
                         }
 
-                        //text color
-                        if (speaker_name == "牛奶酱")
-                            words = "<color=magenta>" + words + "</color>";
-                        co_canvas.GetComponent<AVGUI>().Say(speaker_name, words);
+                        GetComponent<AVGUI>().Say(speaker_name, words);
                         break;
 
 
@@ -234,7 +226,7 @@ public class AvgEngine : MonoBehaviour
             }
             else
             {
-                Exit();
+                act_init.GetComponent<ModeSwitch>().EnterMode("act");
             }
         }
         else if (wait)
@@ -253,10 +245,10 @@ public class AvgEngine : MonoBehaviour
                     break;
             }
         }
-        if (pause)
-            co_canvas.SetActive(true);
-        if (wait)
-            co_canvas.SetActive(false);
+        // if (pause)
+        // co_canvas.SetActive(true);
+        // if (wait)
+        // co_canvas.SetActive(false);
     }
 
     void FixedUpdate()
@@ -301,15 +293,6 @@ public class AvgEngine : MonoBehaviour
     {
         wait = false;
         i++;
-    }
-
-    private void Exit()
-    {
-        GetComponent<Platformer2DUserControl>().enabled = true;
-        //GetComponent<hp_gauge>().enabled = true;
-        GetComponent<AvgEngineInput>().enabled = false;
-        co_canvas.SetActive(false);
-        enabled = false;
     }
 
     private void CommandWarning()

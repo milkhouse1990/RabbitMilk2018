@@ -27,8 +27,6 @@ public class hp_gauge : MonoBehaviour
         GameObject milk = GameObject.Find("milk");
         if (milk != null)
         {
-            if (milk.GetComponent<AvgEngine>().enabled)
-                return;
             hp = milk.GetComponent<Status>().GetHp();
             mhp = milk.GetComponent<Status>().hpmax;
 

@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EndingFastest : MonoBehaviour {
+public class EndingFastest : MonoBehaviour
+{
     private bool end_fast = false;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag=="weapon" &&
+        if (other.tag == "weapon" &&
             end_fast)
         {
             GameObject milk = GameObject.Find("milk");
@@ -37,7 +40,7 @@ public class EndingFastest : MonoBehaviour {
                 "say 2 不要！不要拿走人家的制服喵！人家好不容易才能穿上这种适合贫乳的妹抖服，不能拿走喵！只要不拿走，叫人家做什么都行！",
                 "say 1 既然这样，那么…"
             };
-            milk.GetComponent<Platformer2DUserControl>().EnterAVGMode("PLOT0000");
+            // milk.GetComponent<Platformer2DUserControl>().EnterAVGMode("PLOT0000");
         }
 
     }

@@ -22,7 +22,7 @@ public class RoadSign : MonoBehaviour
         GameObject player = GameObject.Find("milk");
         Vector3 roadsign_pos = new Vector3(10, 5, 0);
 
-        GameObject ACTManage = GameObject.Find("ACTInit");
+        GameObject ACTManage = GameObject.Find("ACTManager");
         string last_scene = ACTManage.GetComponent<LvInitiate>().LastLevel;
 
         switch (last_scene)
