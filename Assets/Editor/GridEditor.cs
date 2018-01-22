@@ -179,7 +179,7 @@ public class GridEditor : Editor
                 case 'd':
                     ACTManager.Clear();
                     ACTManager.ThisLevel = grid.scenename;
-                    ACTManager.LoadLevel();
+                    ACTManager.LoadLevel(true);
                     break;
             }
         }

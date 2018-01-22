@@ -85,7 +85,7 @@ public class LvInitiate : MonoBehaviour
                 GameObject.Destroy(go);
         }
     }
-    public void LoadLevel()
+    public void LoadLevel(bool EditMode = false)
     {
         XmlSaver xs = new XmlSaver();
         string path = "Level/" + ThisLevel + ".lv";
@@ -114,8 +114,9 @@ public class LvInitiate : MonoBehaviour
             float y = li.y;
             string arg = "";
 
-            LoadTile(tag, name, x, y, arg);
+            LoadTile(tag, name, x, y, arg, EditMode);
         }
+        // event item
         foreach (EventItem ei in levelinfo.events)
         {
             string tag = "Event";
@@ -137,9 +138,17 @@ public class LvInitiate : MonoBehaviour
             LoadTile(tag, name, x, y, arg);
         }
     }
-    private void LoadTile(string tag, string name, float x, float y, string arg)
+    private void LoadTile(string tag, string name, float x, float y, string arg, bool EditMode = false)
     {
-        if (tag != "Player")
+        if (tag == "Player")
+        {
+            player.transform.position = new Vector3(x, y, 0);
+            Camera.main.GetComponent<CameraFollow>().FindCurrentRoom();
+            Camera.main.GetComponent<CameraFollow>().FollowPlayer();
+            if (!EditMode)
+                GetComponent<ModeSwitch>().EnterMode("act");
+        }
+        else
         {
             GameObject pre;
             if (DebugMode)
@@ -158,19 +167,15 @@ public class LvInitiate : MonoBehaviour
                 pre = Instantiate(pre);
             }
             pre.name = name;
-            if (name == "GotoPlot")
-                pre.GetComponent<Plot>().plotno = arg;
-            else if (name == "GotoScene")
-                pre.GetComponent<GotoScene>().scenename = arg;
-
             pre.transform.position = new Vector3(x, y, 0);
-        }
-        else
-        {
-            player.transform.position = new Vector3(x, y, 0);
-            Camera.main.GetComponent<CameraFollow>().FindCurrentRoom();
-            Camera.main.GetComponent<CameraFollow>().FollowPlayer();
-            GetComponent<ModeSwitch>().EnterMode("act");
+
+            if (tag == "Event")
+                if (name == "GotoPlot")
+                    pre.GetComponent<Plot>().plotno = arg;
+                else if (name == "GotoScene")
+                    pre.GetComponent<GotoScene>().scenename = arg;
+                else if (name == "GotoMap")
+                    pre.GetComponent<Plot>().plotno = arg;
         }
     }
     // load story

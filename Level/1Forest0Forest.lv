@@ -132,10 +132,10 @@
     </items>
     <events>
         <EventItem>
-            <name>GotoPlot</name>
+            <name>GotoMap</name>
             <x>19.5</x>
             <y>5.5</y>
-            <arg>3</arg>
+            <arg>2</arg>
         </EventItem>
     </events>
     <Rooms>
