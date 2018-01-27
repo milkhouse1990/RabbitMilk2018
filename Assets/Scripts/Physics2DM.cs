@@ -28,31 +28,23 @@ public class Physics2DM : MonoBehaviour
         velocity += new Vector3(0, gravity.y * Time.deltaTime, 0);
         transform.position += new Vector3(0, velocity.y * Time.deltaTime, 0);
 
-        ColliderBox[] cbs = FindObjectsOfType<ColliderBox>() as ColliderBox[];
-        foreach (ColliderBox cb in cbs)
-        {
-            if (cb.transform == transform)
-                continue;
+        // check ground
 
-            // check ground
+        // check rampup
+        RampUp[] rampUps = FindObjectsOfType<RampUp>() as RampUp[];
+        foreach (RampUp rampUp in rampUps)
+        {
             Vector3 foot = transform.position + new Vector3(-mcb.size.width / 2, -ImageSize.height / 2, 0);
             for (int i = 0; i < mcb.size.width * 10 + 1; i++)
             {
-                if (cb.CheckIn(foot))
+                if (rampUp.CheckIn(foot))
                 {
-                    if (cb.type == 1)
                     {
-                        transform.position += Vector3.up * cb.GetRise(transform.position + new Vector3(mcb.size.width / 2, -ImageSize.height / 2, 0));
+                        transform.position += Vector3.up * rampUp.GetRise(transform.position + new Vector3(mcb.size.width / 2, -ImageSize.height / 2, 0));
                         velocity -= Vector3.up * velocity.y;
                         mGrounded = true;
                         mRamp = true;
-                    }
-                    else
-                    {
-                        transform.position += Vector3.up * (cb.transform.position.y + (cb.size.height + ImageSize.height) / 2 - transform.position.y);
-                        velocity -= Vector3.up * velocity.y;
-                        mGrounded = true;
-
+                        // Debug.Log("OnRampUp");
                     }
                     break;
                 }
@@ -61,7 +53,30 @@ public class Physics2DM : MonoBehaviour
             }
         }
 
+        // check colliderbox
+        ColliderBox[] cbs = FindObjectsOfType<ColliderBox>() as ColliderBox[];
+        foreach (ColliderBox cb in cbs)
+        {
+            if (cb.transform == transform)
+                continue;
+
+            Vector3 foot = transform.position + new Vector3(-mcb.size.width / 2, -ImageSize.height / 2, 0);
+            for (int i = 0; i < mcb.size.width * 10 + 1; i++)
+            {
+                if (cb.CheckIn(foot))
+                {
+                    transform.position += Vector3.up * (cb.transform.position.y + (cb.size.height + ImageSize.height) / 2 - transform.position.y);
+                    velocity -= Vector3.up * velocity.y;
+                    mGrounded = true;
+                    break;
+                }
+                else
+                    foot += new Vector3(0.1f, 0, 0);
+            }
+        }
+
         // x axis
+        // player move
         transform.position += Vector3.right * velocity.x * Time.deltaTime;
         if (mRamp && velocity.x < 0)
         {
@@ -69,7 +84,27 @@ public class Physics2DM : MonoBehaviour
             // mRamp = false;
         }
 
-        cbs = FindObjectsOfType<ColliderBox>() as ColliderBox[];
+        // check rampup
+        foreach (RampUp rampUp in rampUps)
+        {
+            // check one-side
+            for (int dir = -1; dir < 2; dir += 2)
+            {
+                Vector3 left = transform.position + new Vector3(dir * mcb.size.width / 2, -ImageSize.height / 2, 0);
+                for (int i = 0; i < mcb.size.height * 5 + 1; i++)
+                {
+                    if (rampUp.CheckIn(left))
+                    {
+                        transform.position += Vector3.up * rampUp.GetRise(left);
+                        break;
+                    }
+                    else
+                        left += new Vector3(0, 0.2f, 0);
+                }
+
+            }
+        }
+        // check colliderbox
         foreach (ColliderBox cb in cbs)
         {
             if (cb.transform == transform)
@@ -83,19 +118,10 @@ public class Physics2DM : MonoBehaviour
                 {
                     if (cb.CheckIn(left))
                     {
-                        if (cb.name == "rampright")
-                        {
-                            transform.position += Vector3.up * cb.GetRise(left);
-                            Debug.Log("hit " + cb.name);
-                            break;
-                        }
-                        else
-                        {
-                            transform.position += Vector3.right * (cb.transform.position.x - dir * (cb.size.width + mcb.size.width) / 2 - transform.position.x);
-                            velocity -= Vector3.right * velocity.x;
-                            Debug.Log("hit " + cb.name);
-                            break;
-                        }
+                        transform.position += Vector3.right * (cb.transform.position.x - dir * (cb.size.width + mcb.size.width) / 2 - transform.position.x);
+                        velocity -= Vector3.right * velocity.x;
+                        // Debug.Log("hit " + cb.name);
+                        break;
                     }
                     else
                         left += new Vector3(0, 0.2f, 0);

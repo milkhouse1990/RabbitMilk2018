@@ -33,9 +33,9 @@ public class ColliderBox : MonoBehaviour
                 return false;
             // rightdown
             case 1:
-                if (position.x < collider.right)
-                    if (position.y > collider.down)
-                        if (position.x > position.y - collider.down + collider.left)
+                if (position.x <= collider.right)
+                    if (position.y >= collider.down)
+                        if (position.x >= position.y - collider.down + collider.left)
                             return true;
                 return false;
 
