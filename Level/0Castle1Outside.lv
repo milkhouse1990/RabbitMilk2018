@@ -155,7 +155,7 @@
         </LevelItem>
         <LevelItem>
             <tag>Wall</tag>
-            <name>rampright</name>
+            <name>RampUp</name>
             <x>55.5</x>
             <y>1.5</y>
         </LevelItem>
@@ -239,7 +239,7 @@
         </LevelItem>
         <LevelItem>
             <tag>Wall</tag>
-            <name>rampright</name>
+            <name>RampUp</name>
             <x>56.5</x>
             <y>2.5</y>
         </LevelItem>
@@ -545,7 +545,7 @@
         </LevelItem>
         <LevelItem>
             <tag>Wall</tag>
-            <name>rampright</name>
+            <name>RampUp</name>
             <x>57.5</x>
             <y>3.5</y>
         </LevelItem>

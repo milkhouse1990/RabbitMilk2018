@@ -7,18 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class AvgEngine : MonoBehaviour
 {
-
-    public GameObject canvas;
-    public Texture2D icon;
-    public Texture2D icon_milk;
-    public Texture2D frame;
-    public Texture2D frame1;
-    public Texture2D np;
-
-    /*
-    0 nextscene
-    1 hime
-    */
+    public GameObject player;
     private GameObject npc;
 
     //ifstream file;
@@ -137,7 +126,7 @@ public class AvgEngine : MonoBehaviour
                     case "costume":
                         int cos;
                         int.TryParse(para[1], out cos);
-                        GetComponent<PlatformerCharacter2D>().CostumeChange(cos);
+                        player.GetComponent<PlatformerCharacter2D>().CostumeChange(cos);
                         i++;
                         break;
                     //charamove x
@@ -216,12 +205,12 @@ public class AvgEngine : MonoBehaviour
                         }
 
                         GetComponent<AVGUI>().Say(speaker_name, words);
+                        Debug.Log("can't understand command: " + commands[i]);
                         break;
 
 
 
 
-                        //Debug.Log("can't understand command: " + commands[i]);
                 }
             }
             else

@@ -31,8 +31,8 @@ public class Move : MonoBehaviour
             {
                 transform.position = new Vector3(transform.position.x, 2.5f, transform.position.z);
                 timer = -1;
-                GameObject milk = GameObject.Find("milk");
-                milk.GetComponent<AvgEngine>().Resume();
+                GameObject milk = GameObject.Find("ACTManager");
+                milk.GetComponentInChildren<AvgEngine>().Resume();
             }
 
         }

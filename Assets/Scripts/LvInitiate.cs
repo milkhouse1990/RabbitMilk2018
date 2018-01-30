@@ -22,6 +22,7 @@ public class LvInitiate : MonoBehaviour
         if (!player)
             Debug.Log("cannot find milk.");
         GetComponentInParent<ModeSwitch>().player = player;
+        GetComponentInChildren<AvgEngine>().player = player;
 
         if (!DebugMode)
         {

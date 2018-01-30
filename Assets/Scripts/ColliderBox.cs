@@ -31,27 +31,7 @@ public class ColliderBox : MonoBehaviour
                             if (position.y > collider.down)
                                 return true;
                 return false;
-            // rightdown
-            case 1:
-                if (position.x <= collider.right)
-                    if (position.y >= collider.down)
-                        if (position.x >= position.y - collider.down + collider.left)
-                            return true;
-                return false;
-
         }
         return false;
-    }
-    public float GetRise(Vector3 point)
-    {
-        switch (type)
-        {
-            case 1:
-                Rect4 collider = new Rect4(size);
-                collider = new Rect4(transform.position.y + collider.up, transform.position.y + collider.down, transform.position.x + collider.left, transform.position.x + collider.right);
-                return point.x - (transform.position.x + size.x) - (point.y - transform.position.y + size.height / 2);
-
-        }
-        return 0;
     }
 }
