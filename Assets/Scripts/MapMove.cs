@@ -24,7 +24,7 @@ public class MapMove : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        milk = transform.Find("milk");
+        milk = transform.Find("MilkBroom");
         PlaceInfo = transform.Find("PlaceInfo").GetComponent<Text>();
 
         dataMenu = transform.Find("DataMenu").gameObject;

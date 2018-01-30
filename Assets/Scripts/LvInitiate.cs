@@ -16,7 +16,7 @@ public class LvInitiate : MonoBehaviour
     // UI
     private bool pause = false;
 
-    void Start()
+    void Awake()
     {
         player = GameObject.Find("milk");
         if (!player)
@@ -27,7 +27,7 @@ public class LvInitiate : MonoBehaviour
         if (!DebugMode)
         {
             scenename = PlayerPrefs.GetString("SceneName");
-            scenename = "0Castle0Party";
+            // scenename = "0Castle0Party";
             // scenename = "0Castle1Outside";
             ThisLevel = scenename;
             // Load Map
@@ -67,16 +67,25 @@ public class LvInitiate : MonoBehaviour
         GameObject[] AllGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
         foreach (GameObject go in AllGameObjects)
         {
-            if (go.name == "grid" || go.name == "Main Camera" || go.name == "scenario" || go.name == "ACTManager" || go.name == "Background")
+            if (go.name == "grid" || go.name == "Main Camera" || go.name == "scenario" || go.name == "ACTManager")
                 continue;
-            if (go.transform.parent != null)
+            // background
+            if (go.name == "Background")
+            {
+                for (int i = 0; i < go.transform.childCount; i++)
+                    if (DebugMode)
+                        GameObject.DestroyImmediate(go.transform.GetChild(i).gameObject);
+                    else
+                        GameObject.Destroy(go.transform.GetChild(i).gameObject);
                 continue;
+            }
+
             if (go.tag == "Player")
             {
                 player = go;
                 continue;
             }
-            if (go.name == "AVGCanvas" || go.name == "player_hp_gauge")
+            if (go.name == "player_hp_gauge")
                 continue;
             if (go.name == "player_bullet")
                 continue;
@@ -165,7 +174,10 @@ public class LvInitiate : MonoBehaviour
                 pre = Resources.Load("Prefabs\\" + tag + "\\" + name, typeof(GameObject)) as GameObject;
                 if (!pre)
                     Debug.Log("tile " + name + " load failed.");
-                pre = Instantiate(pre);
+                if (tag == "Background")
+                    pre = Instantiate(pre, GameObject.Find("Background").transform);
+                else
+                    pre = Instantiate(pre);
             }
             pre.name = name;
             pre.transform.position = new Vector3(x, y, 0);

@@ -210,7 +210,7 @@
         <Background>
             <name>party_bg</name>
             <x>10</x>
-            <y>3</y>
+            <y>5.625</y>
         </Background>
     </backgrounds>
 </LevelInfo>

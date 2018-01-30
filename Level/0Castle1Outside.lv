@@ -674,11 +674,4 @@
             <yMax>24.5</yMax>
         </Rect>
     </Rooms>
-    <backgrounds>
-        <Background>
-            <name>party_bg</name>
-            <x>10</x>
-            <y>3</y>
-        </Background>
-    </backgrounds>
 </LevelInfo>
