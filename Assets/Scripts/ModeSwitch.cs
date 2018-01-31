@@ -2,8 +2,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // control mode activation and switch
+// toppest manager of the ACT game scene
 public class ModeSwitch : MonoBehaviour
 {
+    public bool debugMode = false;
+    public LvInitiate lvInitiate;
     public GameObject player;
 
     private string currentMode;
@@ -17,6 +20,23 @@ public class ModeSwitch : MonoBehaviour
         mapCanvas = transform.Find("MapCanvas").gameObject;
         avgCanvas = transform.Find("AVGCanvas").gameObject;
         fairyCanvas = transform.Find("FairyCanvas").gameObject;
+
+        player = GameObject.Find("milk");
+        if (!player)
+            Debug.Log("cannot find milk.");
+        GetComponentInChildren<AvgEngine>().player = player;
+
+        lvInitiate = new LvInitiate(debugMode, player);
+    }
+    void Start()
+    {
+        Canvas[] canvases = GetComponentsInChildren<Canvas>();
+        foreach (Canvas canvas in canvases)
+            canvas.enabled = true;
+
+        LoadSaveFile();
+
+        lvInitiate.Start();
     }
     void Update()
     {
@@ -102,11 +122,28 @@ public class ModeSwitch : MonoBehaviour
                         EnterMode("map");
                         int temp;
                         int.TryParse(plot.plotno, out temp);
-                        mapCanvas.GetComponent<MapMove>().AddPlace(temp);
+                        mapCanvas.GetComponent<MapMove>().PlacesUpdate(temp);
                     }
                 }
             }
         }
+    }
+
+    public void LoadSaveFile()
+    {
+        if (!debugMode)
+        {
+            int placeProgress = PlayerPrefs.GetInt("placeProgress");
+            if (placeProgress == -1)
+                lvInitiate.SetThisLevel("0Castle0Party");
+            else
+            {
+                mapCanvas.GetComponent<MapMove>().PlacesUpdate(placeProgress);
+                EnterMode("map");
+                return;
+            }
+        }
+        EnterMode("act");
     }
     public void EnterMode(string mode)
     {
@@ -123,9 +160,11 @@ public class ModeSwitch : MonoBehaviour
         {
             case "map":
                 mapCanvas.SetActive(true);
+                player.GetComponent<Physics2DM>().velocity = new Vector2(0, 0);
                 break;
             case "act":
                 player.GetComponent<Platformer2DUserControl>().enabled = true;
+                player.GetComponent<Physics2DM>().enabled = true;
                 break;
             case "avg":
                 avgCanvas.SetActive(true);

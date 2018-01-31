@@ -9,13 +9,13 @@ public class MapMove : MonoBehaviour
 
     private Transform milk;
     private Text PlaceInfo;
+    private Text instructions;
 
     private GameObject dataMenu;
 
     private GameObject dataCanvas;
 
     private Transform placesTransform;
-    public int placeProgress = 0;
 
     // Use this for initialization
     void Awake()
@@ -24,6 +24,7 @@ public class MapMove : MonoBehaviour
 
         milk = transform.Find("MilkBroom");
         PlaceInfo = transform.Find("PlaceInfo").GetComponent<Text>();
+        instructions = transform.Find("Instruction").GetComponent<Text>();
 
         dataMenu = transform.Find("DataMenu").gameObject;
         dataMenu.SetActive(false);
@@ -66,10 +67,14 @@ public class MapMove : MonoBehaviour
             string[] sceneNames = { "0Castle1Outside", "1Forest0Forest", "2Highway0Highway", "3Stadium0Stadium", "4Base0Base", "5Space0Space" };
             if (Input.GetButtonDown("A") && place < colliderBoxes.Length)
             {
-                GetComponentInParent<LvInitiate>().ReloadMap(sceneNames[place]);
+                transform.parent.GetComponent<ModeSwitch>().lvInitiate.ReloadMap(sceneNames[place]);
             }
+            // open data menu
             if (Input.GetButtonDown("X"))
+            {
                 dataMenu.gameObject.SetActive(true);
+                instructions.text = "↑↓ Select A Confirm B Back";
+            }
         }
         else if (dataMenu.gameObject.activeInHierarchy)
         {
@@ -82,12 +87,14 @@ public class MapMove : MonoBehaviour
                         dataMenu.SetActive(false);
                         dataCanvas.SetActive(true);
                         dataCanvas.GetComponent<DiaryBook>().SetSaveFlag(true);
+                        instructions.text = "↑↓ Select A Save B Back";
                         break;
                     // load
                     case 1:
                         dataMenu.SetActive(false);
                         dataCanvas.SetActive(true);
                         dataCanvas.GetComponent<DiaryBook>().SetSaveFlag(false);
+                        instructions.text = "↑↓ Select A Load B Back";
                         break;
                     // title
                     case 2:
@@ -97,23 +104,37 @@ public class MapMove : MonoBehaviour
             if (Input.GetButtonDown("B"))
             {
                 dataMenu.SetActive(false);
+                instructions.text = "↑↓←→ Move A Enter X Data Menu";
             }
         }
         else
         {
             // data canvas's control
             if (Input.GetButtonDown("B"))
+            {
+                dataMenu.SetActive(true);
                 dataCanvas.SetActive(false);
+                instructions.text = "↑↓ Select A Confirm B Back";
+            }
+            if (Input.GetButtonDown("A") && !dataCanvas.GetComponent<DiaryBook>().GetSaveFlag())
+            {
+                instructions.text = "↑↓←→ Move A Enter X Data Menu";
+            }
         }
 
     }
-    public void AddPlace(int updateProgress)
+    public void PlacesUpdate(int updateProgress)
     {
-        while (updateProgress > placeProgress)
-        {
-            placeProgress++;
-            GameObject go = Resources.Load("UI/" + "Place" + placeProgress.ToString()) as GameObject;
-            Instantiate(go, placesTransform);
-        }
+        int progress = GetPlaceProgress();
+        if (updateProgress > progress)
+            for (progress++; progress <= updateProgress; progress++)
+                Instantiate(Resources.Load("UI/Place" + progress.ToString()) as GameObject, placesTransform);
+        else if (updateProgress < progress)
+            for (; progress > updateProgress; progress--)
+                GameObject.Destroy(placesTransform.GetChild(progress).gameObject);
+    }
+    public int GetPlaceProgress()
+    {
+        return placesTransform.childCount - 1;
     }
 }

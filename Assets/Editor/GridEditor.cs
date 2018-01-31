@@ -20,7 +20,7 @@ public class GridEditor : Editor
     public void OnEnable()
     {
         grid = (Grid)target;
-        ACTManager = GameObject.Find("ACTManager").GetComponent<LvInitiate>();
+        ACTManager = GameObject.Find("ACTManager").GetComponent<ModeSwitch>().lvInitiate;
         // toolbar init
         focus = 0;
         catecory = new string[] { "Wall", "Enemy", "Npc", "Event" };
@@ -178,7 +178,7 @@ public class GridEditor : Editor
                 // load the map
                 case 'd':
                     ACTManager.Clear();
-                    ACTManager.ThisLevel = grid.scenename;
+                    ACTManager.SetThisLevel(grid.scenename);
                     ACTManager.LoadLevel(true);
                     break;
             }

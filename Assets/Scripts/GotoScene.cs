@@ -25,7 +25,7 @@ public class GotoScene : MonoBehaviour
             GameObject act_init = GameObject.Find("ACTManager");
             if (act_init == null)
                 act_init = Instantiate(pre_act_init);
-            act_init.GetComponent<LvInitiate>().ReloadMap(scenename);
+            act_init.GetComponent<ModeSwitch>().lvInitiate.ReloadMap(scenename);
             SceneManager.LoadScene(scenename);
         }
     }

@@ -186,7 +186,7 @@ public class AvgEngine : MonoBehaviour
                     //gotoscene scenename
                     //进入名为scenename的scene
                     case "gotoscene":
-                        act_init.GetComponent<LvInitiate>().ReloadMap(para[1]);
+                        act_init.GetComponent<ModeSwitch>().lvInitiate.ReloadMap(para[1]);
                         i++;
                         break;
 
@@ -250,7 +250,7 @@ public class AvgEngine : MonoBehaviour
 
     public void Open(string binid)
     {
-        commands = act_init.GetComponent<LvInitiate>().GetCutContents(binid).ToArray();
+        commands = act_init.GetComponent<ModeSwitch>().lvInitiate.GetCutContents(binid).ToArray();
         i = 0;
     }
 
