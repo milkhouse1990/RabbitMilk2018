@@ -24,8 +24,8 @@ public class DiaryBook : MonoBehaviour
     {
         CursorUpdate();
 
-        for (int i = 0; i < 3; i++)
-            gameDataManager.Check(i);
+        // for (int i = 0; i < 3; i++)
+        // gameDataManager.Check(i);
     }
 
     // Update is called once per frame

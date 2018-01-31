@@ -128,17 +128,6 @@ public class Physics2DM : MonoBehaviour
                 }
             }
         }
-        // check enemy
-        Enemy[] enemies = FindObjectsOfType<Enemy>() as Enemy[];
-        foreach (Enemy enemy in enemies)
-        {
-            if (enemy.CheckIn(mcb))
-            {
-                GetComponent<Platformer2DUserControl>().MeetEnemy(enemy.gameObject);
-                // GameObject.Destroy(enemy.gameObject);
-                break;
 
-            }
-        }
     }
 }

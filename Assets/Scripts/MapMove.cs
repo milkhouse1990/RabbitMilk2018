@@ -17,13 +17,11 @@ public class MapMove : MonoBehaviour
     private Transform placesTransform;
     public int placeProgress = 0;
 
+    // Use this for initialization
     void Awake()
     {
         placesTransform = transform.Find("Places");
-    }
-    // Use this for initialization
-    void Start()
-    {
+
         milk = transform.Find("MilkBroom");
         PlaceInfo = transform.Find("PlaceInfo").GetComponent<Text>();
 

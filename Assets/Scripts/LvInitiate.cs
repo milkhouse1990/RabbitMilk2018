@@ -16,7 +16,7 @@ public class LvInitiate : MonoBehaviour
     // UI
     private bool pause = false;
 
-    void Awake()
+    void Start()
     {
         player = GameObject.Find("milk");
         if (!player)
@@ -36,6 +36,9 @@ public class LvInitiate : MonoBehaviour
         else
         {
             ThisLevel = GameObject.Find("grid").GetComponent<Grid>().scenename;
+           Canvas[] canvases= GetComponentsInChildren<Canvas>();
+           foreach(Canvas canvas in canvases)
+           canvas.enabled=true;
             GetComponent<ModeSwitch>().EnterMode("act");
             LoadStory();
         }

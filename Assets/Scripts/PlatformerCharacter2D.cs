@@ -118,6 +118,19 @@ public class PlatformerCharacter2D : MonoBehaviour
             m_Anim.SetBool("Attack", false);
         if (counter_attack >= 0)
             counter_attack--;
+
+        // check enemy
+        Enemy[] enemies = FindObjectsOfType<Enemy>() as Enemy[];
+        foreach (Enemy enemy in enemies)
+        {
+            if (enemy.CheckIn(GetComponent<ColliderBox>()))
+            {
+                GetComponent<Platformer2DUserControl>().MeetEnemy(enemy.gameObject);
+                // GameObject.Destroy(enemy.gameObject);
+                break;
+
+            }
+        }
     }
 
     public void Move(float move, bool crouch, bool jump, bool jump_realise)
