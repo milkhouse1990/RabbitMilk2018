@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class Physics2DM : MonoBehaviour
 {
     public Vector3 velocity = Vector3.zero;
-    private Vector3 gravity = new Vector3(0, -30, 0);
+    public Vector3 gravity = new Vector3(0, -30, 0);
     private ColliderBox mcb;
     private Rect ImageSize = new Rect(-1, -1.5f, 2, 3);
     public bool mGrounded = false;
@@ -68,10 +68,16 @@ public class Physics2DM : MonoBehaviour
                     transform.position += Vector3.up * (cb.transform.position.y + (cb.size.height + ImageSize.height) / 2 - transform.position.y);
                     velocity -= Vector3.up * velocity.y;
                     mGrounded = true;
+                    // check vertical moving platform
+                    if (cb.name == "FallingWood")
+                        transform.parent = cb.transform;
                     break;
                 }
                 else
                     foot += new Vector3(0.1f, 0, 0);
+                // leave vertical moving platform
+                if (transform.parent != null && transform.parent == cb.transform)
+                    transform.parent = null;
             }
         }
 

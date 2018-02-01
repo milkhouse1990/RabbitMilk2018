@@ -43,19 +43,26 @@ public class ModeSwitch : MonoBehaviour
         switch (currentMode)
         {
             case "act":
-
                 // check npc
                 if (Input.GetButtonDown("up"))
                 {
-                    Npc[] npcs = FindObjectsOfType<Npc>() as Npc[];
-                    foreach (Npc npc in npcs)
+                    ActiveTrigger[] npcs = FindObjectsOfType<ActiveTrigger>() as ActiveTrigger[];
+                    foreach (ActiveTrigger npc in npcs)
                     {
                         if (npc.CheckIn(player.GetComponent<ColliderBox>()))
                         {
-                            string binid = "NPC" + npc.npcno;
-                            avgCanvas.GetComponent<AvgEngine>().Open(binid);
-                            EnterMode("avg");
-                            break;
+                            if (npc.type == 0)
+                            {
+                                string binid = "NPC" + npc.GetComponent<Npc>().npcno;
+                                avgCanvas.GetComponent<AvgEngine>().Open(binid);
+                                EnterMode("avg");
+                                break;
+                            }
+                            else if (npc.type == 1)
+                            {
+                                npc.GetComponent<InsideOutsideTree>().EnterTree();
+                                break;
+                            }
                         }
                     }
                 }

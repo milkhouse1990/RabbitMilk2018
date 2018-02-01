@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 61542403955198664}
   - component: {fileID: 212329717155224382}
   - component: {fileID: 114846376453832810}
+  - component: {fileID: 114145682834206270}
   m_Layer: 0
   m_Name: death
-  m_TagString: enemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1938345824457270}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.914659, y: 3.1420913, z: 0}
+  m_LocalPosition: {x: 54.5, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -67,6 +68,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114145682834206270
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1938345824457270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a70130a648518e44f959c0a9bcce9b55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  check:
+    serializedVersion: 2
+    x: -0.5
+    y: 0.5
+    width: 1
+    height: 1
+  drop: []
 --- !u!114 &114846376453832810
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -79,9 +98,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpmax: 1
+  mpmax: 0
   atk: 16
   def: 99
-  milk_die: {fileID: 0}
   b_autorecover: 0
 --- !u!212 &212329717155224382
 SpriteRenderer:
@@ -123,3 +142,5 @@ SpriteRenderer:
   m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

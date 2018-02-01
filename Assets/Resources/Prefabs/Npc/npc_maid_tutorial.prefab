@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4369300891932666}
   - component: {fileID: 212850092591163092}
-  - component: {fileID: 61103030755408094}
   - component: {fileID: 114511347169874858}
+  - component: {fileID: 114661674796275922}
   m_Layer: 8
   m_Name: npc_maid_tutorial
   m_TagString: npc
@@ -42,31 +42,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61103030755408094
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1581566209587228}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 3}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.5, y: 2}
-  m_EdgeRadius: 0
 --- !u!114 &114511347169874858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -79,12 +54,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcno: 0
+--- !u!114 &114661674796275922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1581566209587228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a68103b1c411c0f4a85c8f04a8a45692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   check:
     serializedVersion: 2
-    x: -0.75
-    y: 0.5
-    width: 1.5
+    x: -0.5
+    y: 1
+    width: 1
     height: 2
+  type: 0
 --- !u!212 &212850092591163092
 SpriteRenderer:
   m_ObjectHideFlags: 1

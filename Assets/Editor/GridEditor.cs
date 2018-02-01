@@ -23,7 +23,7 @@ public class GridEditor : Editor
         ACTManager = GameObject.Find("ACTManager").GetComponent<ModeSwitch>().lvInitiate;
         // toolbar init
         focus = 0;
-        catecory = new string[] { "Wall", "Enemy", "Npc", "Event" };
+        catecory = new string[] { "Wall", "Enemy", "ActiveTrigger", "Event" };
         int l_catecory = catecory.Length;
         focus_tile = new int[l_catecory];
         for (int i = 0; i < l_catecory; i++)
