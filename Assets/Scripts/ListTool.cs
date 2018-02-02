@@ -5,9 +5,7 @@ using UnityEngine.UI;
 
 public class ListTool : MonoBehaviour
 {
-    private int[] bag = new int[50];
     public int current = 0;
-    private string[] names;
 
     public string binid;
     private ListItems lis;
@@ -20,7 +18,6 @@ public class ListTool : MonoBehaviour
     private Transform ch_list;
     private Transform ch_info;
 
-    private Rect list_pos;
     private Rect info_pos;
 
     public void InitText(ListItems plis)
@@ -117,10 +114,6 @@ public class ListTool : MonoBehaviour
     public void SetFocus(int foc)
     {
         current = foc;
-    }
-    public void SetListPos(Rect p_list_pos)
-    {
-        list_pos = p_list_pos;
     }
     public void SetInfoPos(Rect p_info_pos)
     {

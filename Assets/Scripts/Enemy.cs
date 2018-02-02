@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour
     }
     void FallOut()
     {
-        GetComponent<Rigidbody2D>().velocity = new Vector2(4, 4);
-        GetComponent<Rigidbody2D>().angularVelocity = 720;
+        GetComponent<Physics2DM>().velocity = new Vector2(4, 4);
+        // GetComponent<Rigidbody2D>().angularVelocity = 720;
     }
 }

@@ -4,52 +4,54 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor;
 
-public class LvInitiate : MonoBehaviour
+// used for stage loading
+// a standalone ACT game scene is called a STAGE.
+// STAGE
+// |- LEVEL: made by TILES.
+//    |- CAMERA:
+//    |- PLAYER:
+//    |- LEVEL ITEM: core gameplay. dealt with by physics engine.
+//    |- EVENT ITEM: trigger to STORY.
+//    |- BACKGROUND: non-interactive.
+// |- STORY: scenarios.
+public class LvInitiate
 {
-    public bool DebugMode = false;
-    private string scenename;
-    private GameObject player = null;
+    private bool debugMode;
+    private GameObject player;
     private Story story;
-    public string ThisLevel;
-    public string LastLevel;
+    private string ThisLevel;
 
-    // UI
-    private bool pause = false;
-
-    void Start()
+    public LvInitiate(bool pdebugMode, GameObject pplayer)
     {
-        player = GameObject.Find("milk");
-        if (!player)
-            Debug.Log("cannot find milk.");
-        GetComponentInParent<ModeSwitch>().player = player;
-        GetComponentInChildren<AvgEngine>().player = player;
+        debugMode = pdebugMode;
+        player = pplayer;
+        ThisLevel = "";
+    }
 
-        if (!DebugMode)
+    public void Start()
+    {
+        if (!debugMode)
         {
-            scenename = PlayerPrefs.GetString("SceneName");
-            scenename = "0Castle0Party";
+            // scenename = PlayerPrefs.GetString("SceneName");
             // scenename = "0Castle1Outside";
-            ThisLevel = scenename;
             // Load Map
-            LoadMap(scenename);
+            if (ThisLevel != "")
+                ReloadMap(ThisLevel);
         }
         else
         {
             ThisLevel = GameObject.Find("grid").GetComponent<Grid>().scenename;
-            GetComponent<ModeSwitch>().EnterMode("act");
             LoadStory();
         }
+
     }
-
-    // Update is called once per frame
-    void Update()
+    public void SetThisLevel(string pthisLevel)
     {
-
+        ThisLevel = pthisLevel;
     }
 
     private void LoadMap(string MapName)
     {
-        LastLevel = ThisLevel;
         ThisLevel = MapName;
 
         LoadLevel();
@@ -67,20 +69,29 @@ public class LvInitiate : MonoBehaviour
         GameObject[] AllGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
         foreach (GameObject go in AllGameObjects)
         {
-            if (go.name == "grid" || go.name == "Main Camera" || go.name == "scenario" || go.name == "ACTManager" || go.name == "Background")
+            if (go.name == "grid" || go.name == "Main Camera" || go.name == "scenario" || go.name == "ACTManager")
                 continue;
-            if (go.transform.parent != null)
+            // background
+            if (go.name == "Background")
+            {
+                for (int i = 0; i < go.transform.childCount; i++)
+                    if (debugMode)
+                        GameObject.DestroyImmediate(go.transform.GetChild(i).gameObject);
+                    else
+                        GameObject.Destroy(go.transform.GetChild(i).gameObject);
                 continue;
+            }
+
             if (go.tag == "Player")
             {
                 player = go;
                 continue;
             }
-            if (go.name == "AVGCanvas" || go.name == "player_hp_gauge")
+            if (go.name == "player_hp_gauge")
                 continue;
             if (go.name == "player_bullet")
                 continue;
-            if (DebugMode)
+            if (debugMode)
                 GameObject.DestroyImmediate(go);
             else
                 GameObject.Destroy(go);
@@ -93,7 +104,7 @@ public class LvInitiate : MonoBehaviour
         LevelInfo levelinfo = xs.GetInfo(path, typeof(LevelInfo)) as LevelInfo;
 
         if (levelinfo == null)
-            if (DebugMode)
+            if (debugMode)
             {
                 levelinfo = new LevelInfo();
                 levelinfo.Rooms = new Rect[1] { new Rect(0, 12.25f, 20, 12.25f) };
@@ -103,7 +114,8 @@ public class LvInitiate : MonoBehaviour
         Camera.main.GetComponent<CameraFollow>().CameraMode = 0;
 
         Camera.main.GetComponent<CameraFollow>().Rooms = new Rect[levelinfo.Rooms.Length];
-        Camera.main.GetComponent<CameraFollow>().Rooms = levelinfo.Rooms;
+        for (int i = 0; i < levelinfo.Rooms.Length; i++)
+            Camera.main.GetComponent<CameraFollow>().Rooms[i] = levelinfo.Rooms[i];
         if (player != null)
             Camera.main.GetComponent<CameraFollow>().target = player.transform;
 
@@ -146,13 +158,11 @@ public class LvInitiate : MonoBehaviour
             player.transform.position = new Vector3(x, y, 0);
             Camera.main.GetComponent<CameraFollow>().FindCurrentRoom();
             Camera.main.GetComponent<CameraFollow>().FollowPlayer();
-            if (!EditMode)
-                GetComponent<ModeSwitch>().EnterMode("act");
         }
         else
         {
             GameObject pre;
-            if (DebugMode)
+            if (debugMode)
             {
                 Object loaded = Resources.Load("Prefabs\\" + tag + "\\" + name, typeof(GameObject));
                 if (!loaded)
@@ -165,7 +175,10 @@ public class LvInitiate : MonoBehaviour
                 pre = Resources.Load("Prefabs\\" + tag + "\\" + name, typeof(GameObject)) as GameObject;
                 if (!pre)
                     Debug.Log("tile " + name + " load failed.");
-                pre = Instantiate(pre);
+                if (tag == "Background")
+                    pre = Object.Instantiate(pre, GameObject.Find("Background").transform);
+                else
+                    pre = Object.Instantiate(pre);
             }
             pre.name = name;
             pre.transform.position = new Vector3(x, y, 0);

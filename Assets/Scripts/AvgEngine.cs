@@ -132,7 +132,7 @@ public class AvgEngine : MonoBehaviour
                     //charamove x
                     //主角走到(x, *)处
                     case "charamove":
-                        GetComponent<PlatformerCharacter2D>().Move(1, false, false, false);
+                        player.GetComponent<PlatformerCharacter2D>().Move(1, false, false, false);
                         wait = true;
                         break;
 
@@ -145,7 +145,7 @@ public class AvgEngine : MonoBehaviour
                         GameObject ef = GameObject.Find("npc_ending_fastest");
                         if (ef == null)
                             Debug.Log("can't find object: npc_ending_fastest.");
-                        ef.GetComponent<EndingFastest>().EndFlagOn();
+                        // ef.GetComponent<EndingFastest>().EndFlagOn();
                         i++;
                         break;
 
@@ -186,7 +186,7 @@ public class AvgEngine : MonoBehaviour
                     //gotoscene scenename
                     //进入名为scenename的scene
                     case "gotoscene":
-                        act_init.GetComponent<LvInitiate>().ReloadMap(para[1]);
+                        act_init.GetComponent<ModeSwitch>().lvInitiate.ReloadMap(para[1]);
                         i++;
                         break;
 
@@ -205,7 +205,7 @@ public class AvgEngine : MonoBehaviour
                         }
 
                         GetComponent<AVGUI>().Say(speaker_name, words);
-                        Debug.Log("can't understand command: " + commands[i]);
+                        // Debug.Log("can't understand command: " + commands[i]);
                         break;
 
 
@@ -225,7 +225,7 @@ public class AvgEngine : MonoBehaviour
                 case "charamove":
                     int temp;
                     int.TryParse(para[1], out temp);
-                    if (transform.position.x >= temp)
+                    if (player.transform.position.x >= temp)
                         Resume();
                     break;
                 case "vibration":
@@ -250,7 +250,7 @@ public class AvgEngine : MonoBehaviour
 
     public void Open(string binid)
     {
-        commands = act_init.GetComponent<LvInitiate>().GetCutContents(binid).ToArray();
+        commands = act_init.GetComponent<ModeSwitch>().lvInitiate.GetCutContents(binid).ToArray();
         i = 0;
     }
 

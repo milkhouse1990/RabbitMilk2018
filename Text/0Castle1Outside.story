@@ -228,6 +228,17 @@
                 </Line>
                 <Line>
                     <args>
+                        <string>plot</string>
+                        <string>1</string>
+                    </args>
+                </Line>
+            </contents>
+        </Cut>
+        <Cut>
+            <no>PLOT1</no>
+            <contents>
+                <Line>
+                    <args>
                         <string>boss</string>
                         <string>0</string>
                     </args>
@@ -235,7 +246,7 @@
             </contents>
         </Cut>
         <Cut>
-            <no>PLOT1</no>
+            <no>PLOT2</no>
             <contents>
                 <Line>
                     <args>

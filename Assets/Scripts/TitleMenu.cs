@@ -53,7 +53,6 @@ public class TitleMenu : MonoBehaviour
                         else
                         {
                             DataInit();
-                            SceneManager.LoadScene("ACT");
                         }
                         break;
                     case 2:
@@ -80,11 +79,7 @@ public class TitleMenu : MonoBehaviour
     }
     void DataInit()
     {
-        //crystal
-        PlayerPrefs.SetInt("Crystal", 0);
-        //fairy
-        PlayerPrefs.SetInt("Fairy", 0);
-        // scene name
-        PlayerPrefs.SetString("SceneName", "0Castle0Party");
+        GameData gameData = new GameData();
+        diaryBook.GetComponent<GameDataManager>().LoadGameData(gameData);
     }
 }

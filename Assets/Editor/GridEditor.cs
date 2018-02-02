@@ -20,10 +20,15 @@ public class GridEditor : Editor
     public void OnEnable()
     {
         grid = (Grid)target;
-        ACTManager = GameObject.Find("ACTManager").GetComponent<LvInitiate>();
+
+        GameObject player = GameObject.Find("milk");
+        if (!player)
+            Debug.Log("cannot find milk.");
+        ACTManager = new LvInitiate(true, player);
+
         // toolbar init
         focus = 0;
-        catecory = new string[] { "Wall", "Enemy", "Npc", "Event" };
+        catecory = new string[] { "Wall", "Enemy", "ActiveTrigger", "Event" };
         int l_catecory = catecory.Length;
         focus_tile = new int[l_catecory];
         for (int i = 0; i < l_catecory; i++)
@@ -178,7 +183,7 @@ public class GridEditor : Editor
                 // load the map
                 case 'd':
                     ACTManager.Clear();
-                    ACTManager.ThisLevel = grid.scenename;
+                    ACTManager.SetThisLevel(grid.scenename);
                     ACTManager.LoadLevel(true);
                     break;
             }
