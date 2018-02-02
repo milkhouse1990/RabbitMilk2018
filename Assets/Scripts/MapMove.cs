@@ -68,6 +68,7 @@ public class MapMove : MonoBehaviour
             if (Input.GetButtonDown("A") && place < colliderBoxes.Length)
             {
                 transform.parent.GetComponent<ModeSwitch>().lvInitiate.ReloadMap(sceneNames[place]);
+                GetComponentInParent<ModeSwitch>().EnterMode("act");
             }
             // open data menu
             if (Input.GetButtonDown("X"))

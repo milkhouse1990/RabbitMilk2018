@@ -166,7 +166,7 @@
             <y>-2.5</y>
         </LevelItem>
         <LevelItem>
-            <tag>Untagged</tag>
+            <tag>Wall</tag>
             <name>tree</name>
             <x>32</x>
             <y>7</y>

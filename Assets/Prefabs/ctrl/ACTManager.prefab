@@ -449,7 +449,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224900171735892590}
-  - component: {fileID: 114696841568905972}
   - component: {fileID: 114558956738598374}
   m_Layer: 5
   m_Name: DiaryBook
@@ -1200,6 +1199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bbde7d12cb1ffa4c958c5e182f3e9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode: 0
   player: {fileID: 0}
 --- !u!114 &114558447595746550
 MonoBehaviour:
@@ -1368,17 +1368,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114696841568905972
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1793780099771746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c704124575904f44a0e4b98cfa76597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114762919178406872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1647,7 +1636,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6dfd1b68d9b1a40b23e1164f97a22c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placeProgress: 0
 --- !u!114 &114999862629351306
 MonoBehaviour:
   m_ObjectHideFlags: 1

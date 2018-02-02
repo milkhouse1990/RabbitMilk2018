@@ -70,7 +70,6 @@ public class FairySystem : MonoBehaviour
         fairy_collection = new bool[a_fairy];
 
         fairy_list = Instantiate(list_tool, transform);
-        fairy_list.SetListPos(list_pos);
         fairy_list.SetInfoPos(info_pos);
 
         fairy_lv_bar = new Text[a_fairy];

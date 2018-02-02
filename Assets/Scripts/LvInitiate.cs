@@ -114,7 +114,8 @@ public class LvInitiate
         Camera.main.GetComponent<CameraFollow>().CameraMode = 0;
 
         Camera.main.GetComponent<CameraFollow>().Rooms = new Rect[levelinfo.Rooms.Length];
-        Camera.main.GetComponent<CameraFollow>().Rooms = levelinfo.Rooms;
+        for (int i = 0; i < levelinfo.Rooms.Length; i++)
+            Camera.main.GetComponent<CameraFollow>().Rooms[i] = levelinfo.Rooms[i];
         if (player != null)
             Camera.main.GetComponent<CameraFollow>().target = player.transform;
 
