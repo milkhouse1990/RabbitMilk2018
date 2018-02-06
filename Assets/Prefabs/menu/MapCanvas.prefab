@@ -122,7 +122,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224581796488060508}
-  - component: {fileID: 114734065222265366}
   - component: {fileID: 114159785672596496}
   m_Layer: 5
   m_Name: DiaryBook
@@ -791,19 +790,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114734065222265366
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1248825165577166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c704124575904f44a0e4b98cfa76597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  datainfo: {fileID: 0}
-  save_flag: 0
 --- !u!114 &114734369478255370
 MonoBehaviour:
   m_ObjectHideFlags: 1
