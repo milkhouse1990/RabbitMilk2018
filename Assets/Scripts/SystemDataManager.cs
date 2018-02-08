@@ -17,7 +17,7 @@ public class SystemData
     {
         character = new bool[7];
         int i;
-        bool init_dis = true;
+        bool init_dis = false;
         for (i = 0; i < character.Length; i++)
             character[i] = init_dis;
         setting = new bool[5];

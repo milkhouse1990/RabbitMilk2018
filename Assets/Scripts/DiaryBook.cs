@@ -11,7 +11,7 @@ public class DiaryBook : MonoBehaviour
     private Text[] datainfo;
     private Text saveload;
     private bool saveFlag;
-    private GameDataManager gameDataManager;
+    public GameDataManager gameDataManager;
 
     void Awake()
     {

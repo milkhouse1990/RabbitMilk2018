@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Status))]
-[RequireComponent(typeof(BoxCollider2D))]
 public class Enemy : MonoBehaviour
 {
     public Rect check;
@@ -24,11 +23,27 @@ public class Enemy : MonoBehaviour
         }
 
     }
+    void FixedUpdate()
+    {
+        Weapon[] weapons = FindObjectsOfType<Weapon>() as Weapon[];
+        foreach (Weapon weapon in weapons)
+        {
+            if (CheckIn(new Rect4(weapon.check).Local2World(weapon.transform)))
+            {
+                GetComponent<Status>().GetDamage(weapon.GetComponent<Status>());
+                weapon.GetComponent<Bullet>().Init();
+            }
+        }
+    }
     public bool CheckIn(ColliderBox cb)
     {
         Rect4 player = new Rect4(cb.size).Local2World(cb.transform);
+        return CheckIn(player);
+    }
+    private bool CheckIn(Rect4 other)
+    {
         Rect4 npc = new Rect4(check).Local2World(transform);
-        if (player.right <= npc.left || player.left >= npc.left || player.down >= npc.up || player.up <= npc.down)
+        if (other.right <= npc.left || other.left >= npc.left || other.down >= npc.up || other.up <= npc.down)
             return false;
         else
             return true;

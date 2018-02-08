@@ -9,7 +9,7 @@ public class ModeSwitch : MonoBehaviour
     public LvInitiate lvInitiate;
     public GameObject player;
 
-    private string currentMode;
+    public string currentMode;
     // UI
     private GameObject mapCanvas;
     private GameObject avgCanvas;
@@ -26,7 +26,7 @@ public class ModeSwitch : MonoBehaviour
             Debug.Log("cannot find milk.");
         GetComponentInChildren<AvgEngine>().player = player;
 
-        lvInitiate = new LvInitiate(debugMode, player);
+        lvInitiate = new LvInitiate(debugMode, player, LoadTileOnRun);
     }
     void Start()
     {
@@ -183,5 +183,16 @@ public class ModeSwitch : MonoBehaviour
                 break;
         }
 
+    }
+    private GameObject LoadTileOnRun(string tag, string name)
+    {
+        GameObject pre = Resources.Load("Prefabs\\" + tag + "\\" + name, typeof(GameObject)) as GameObject;
+        if (!pre)
+            Debug.Log("tile " + name + " load failed.");
+        if (tag == "Background")
+            pre = Object.Instantiate(pre, GameObject.Find("Background").transform);
+        else
+            pre = Object.Instantiate(pre);
+        return pre;
     }
 }

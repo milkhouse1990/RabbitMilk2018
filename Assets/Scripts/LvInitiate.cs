@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEditor;
 
+public delegate GameObject LoadTile(string tag, string name);
 // used for stage loading
 // a standalone ACT game scene is called a STAGE.
 // STAGE
@@ -20,12 +20,15 @@ public class LvInitiate
     private GameObject player;
     private Story story;
     private string ThisLevel;
+    // refer to the method on how to load a tile (edittime or runtime) 
+    private LoadTile loadTile;
 
-    public LvInitiate(bool pdebugMode, GameObject pplayer)
+    public LvInitiate(bool pdebugMode, GameObject pplayer, LoadTile ploadTile)
     {
         debugMode = pdebugMode;
         player = pplayer;
         ThisLevel = "";
+        loadTile = ploadTile;
     }
 
     public void Start()
@@ -162,24 +165,8 @@ public class LvInitiate
         else
         {
             GameObject pre;
-            if (debugMode)
-            {
-                Object loaded = Resources.Load("Prefabs\\" + tag + "\\" + name, typeof(GameObject));
-                if (!loaded)
-                    Debug.Log("tile " + name + " load failed.");
+            pre = loadTile(tag, name);
 
-                pre = PrefabUtility.InstantiatePrefab(loaded) as GameObject;
-            }
-            else
-            {
-                pre = Resources.Load("Prefabs\\" + tag + "\\" + name, typeof(GameObject)) as GameObject;
-                if (!pre)
-                    Debug.Log("tile " + name + " load failed.");
-                if (tag == "Background")
-                    pre = Object.Instantiate(pre, GameObject.Find("Background").transform);
-                else
-                    pre = Object.Instantiate(pre);
-            }
             pre.name = name;
             pre.transform.position = new Vector3(x, y, 0);
 
@@ -213,5 +200,6 @@ public class LvInitiate
         Debug.Log("cannot load " + cutno + " .");
         return null;
     }
+
 
 }

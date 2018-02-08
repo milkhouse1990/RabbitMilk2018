@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class DataBase : MonoBehaviour
 {
@@ -23,13 +24,14 @@ public class DataBase : MonoBehaviour
     private bool b_info = true;
     ListItems[] liss;
 
-
-    public Rect list_pos;
-    public Rect info_pos;
-
     private ListTool db_list;
-    public ListTool listtool;
 
+    private Text category;
+    private string[] categoryNames = { "Characters", "Expressions", "Endings" };
+    void Awake()
+    {
+        category = transform.Find("Category").GetComponent<Text>();
+    }
     // Use this for initialization
     void Start()
     {
@@ -82,9 +84,8 @@ public class DataBase : MonoBehaviour
             labelpos--;
             if (labelpos == -1)
                 labelpos = labels - 1;
-            db_list.SetFocus(pos[labelpos]);
-            db_list.InitText(liss[labelpos]);
 
+            UpdateMenu();
             //page.SetScroll(dispos[labelpos]);
         }
         if (Input.GetButtonDown("right"))
@@ -94,9 +95,8 @@ public class DataBase : MonoBehaviour
             labelpos++;
             if (labelpos == labels)
                 labelpos = 0;
-            db_list.SetFocus(pos[labelpos]);
-            db_list.InitText(liss[labelpos]);
 
+            UpdateMenu();
             //page.SetScroll(dispos[labelpos]);
         }
         if (Input.GetButtonDown("A"))
@@ -112,4 +112,10 @@ public class DataBase : MonoBehaviour
             delay--;
     }
 
+    private void UpdateMenu()
+    {
+        db_list.SetFocus(pos[labelpos]);
+        db_list.InitText(liss[labelpos]);
+        category.text = categoryNames[labelpos];
+    }
 }

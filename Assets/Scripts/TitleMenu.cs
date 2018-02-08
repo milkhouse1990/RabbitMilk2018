@@ -80,6 +80,6 @@ public class TitleMenu : MonoBehaviour
     void DataInit()
     {
         GameData gameData = new GameData();
-        diaryBook.GetComponent<GameDataManager>().LoadGameData(gameData);
+        diaryBook.GetComponent<DiaryBook>().gameDataManager.LoadGameData(gameData);
     }
 }

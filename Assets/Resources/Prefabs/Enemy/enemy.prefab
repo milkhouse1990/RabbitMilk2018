@@ -21,10 +21,10 @@ GameObject:
   - component: {fileID: 4843047797574348}
   - component: {fileID: 114495033287009950}
   - component: {fileID: 212881745388474640}
-  - component: {fileID: 61726917424836526}
   - component: {fileID: 114942104042569552}
   - component: {fileID: 114662947890225718}
-  - component: {fileID: 50631991214607316}
+  - component: {fileID: 114984408284000604}
+  - component: {fileID: 114047869657169854}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Enemy
@@ -45,51 +45,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50631991214607316
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1320069750115602}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &61726917424836526
-BoxCollider2D:
+--- !u!114 &114047869657169854
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1320069750115602}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 3626fe8e008014f6bbd19bb72937b311, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 3}
-    newSize: {x: 2, y: 3}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2}
-  m_EdgeRadius: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24f8808cceff92746b518378e004811f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  size:
+    serializedVersion: 2
+    x: -0.5
+    y: 1
+    width: 1
+    height: 2
 --- !u!114 &114495033287009950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -116,7 +89,7 @@ MonoBehaviour:
   check:
     serializedVersion: 2
     x: -0.5
-    y: 0.5
+    y: 1
     width: 1
     height: 2
   drop:
@@ -138,6 +111,21 @@ MonoBehaviour:
   atk: 1
   def: 0
   b_autorecover: 0
+--- !u!114 &114984408284000604
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1320069750115602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97411969c8248054f8c89a3ee664f8cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: {x: 0, y: 0, z: 0}
+  gravity: {x: 0, y: 0, z: 0}
+  mGrounded: 0
+  mRamp: 0
 --- !u!212 &212881745388474640
 SpriteRenderer:
   m_ObjectHideFlags: 1

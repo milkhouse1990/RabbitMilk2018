@@ -84,11 +84,8 @@ GameObject:
   - component: {fileID: 95732151647025228}
   - component: {fileID: 114943859579710288}
   - component: {fileID: 114607095318689216}
-  - component: {fileID: 114770561150256942}
-  - component: {fileID: 114181048634228308}
   - component: {fileID: 114539085392554898}
   - component: {fileID: 114608835991581718}
-  - component: {fileID: 114907220987858546}
   - component: {fileID: 114730164971383256}
   - component: {fileID: 114449347682113662}
   m_Layer: 0
@@ -209,17 +206,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114181048634228308
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1472702091474996}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d093d5dd248c02e46a18862a365da224, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114449347682113662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -272,7 +258,6 @@ MonoBehaviour:
   waitnpc: {fileID: 2800000, guid: df1635ab990dfce468d2b010ced7af3f, type: 3}
   warning: {fileID: 4290131265494466, guid: 150aa8599b4fe1d4881778e84e345010, type: 2}
   act_menu: {fileID: 1587433960053726, guid: 403f2a6f8e08d824c8964e8bbcf99738, type: 2}
-  pause_menu: {fileID: 1955572246279552, guid: 9b2680c130b3b994ba125fd8bc80c3e1, type: 2}
 --- !u!114 &114608835991581718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -296,36 +281,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0, z: 0}
+  gravity: {x: 0, y: -30, z: 0}
   mGrounded: 0
   mRamp: 0
---- !u!114 &114770561150256942
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1472702091474996}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbbc44562d12f0d4f8149d7b2de48957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 1498291320931890, guid: 0b23795da1b7eeb49b2719fd40951e23, type: 2}
-  icon: {fileID: 2800000, guid: 990f2d71993903647854f77d8145309f, type: 3}
-  icon_milk: {fileID: 2800000, guid: 990f2d71993903647854f77d8145309f, type: 3}
-  frame: {fileID: 2800000, guid: 4fa4023704bd3944c9fea34e60224327, type: 3}
-  frame1: {fileID: 2800000, guid: c135e1165477f5742810167e35c66b47, type: 3}
-  np: {fileID: 2800000, guid: 5b52f4494d6851749afa6145d27866c6, type: 3}
---- !u!114 &114907220987858546
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1472702091474996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb7cbf8f426d3b34bb23b485df02c587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114943859579710288
 MonoBehaviour:
   m_ObjectHideFlags: 1
