@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 212588918491675250}
   - component: {fileID: 114610603873159906}
   - component: {fileID: 114182397788446078}
+  - component: {fileID: 114355752199107436}
   m_Layer: 8
   m_Name: player_bulllet
   m_TagString: weapon
@@ -100,6 +101,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af7c25548a1cef5418896945535b039a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114355752199107436
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1517819218075170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae359758c43afac4d9f0c8605478432b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  check:
+    serializedVersion: 2
+    x: -0.5
+    y: 0.5
+    width: 1
+    height: 1
 --- !u!114 &114610603873159906
 MonoBehaviour:
   m_ObjectHideFlags: 1

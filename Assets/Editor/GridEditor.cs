@@ -24,7 +24,7 @@ public class GridEditor : Editor
         GameObject player = GameObject.Find("milk");
         if (!player)
             Debug.Log("cannot find milk.");
-        ACTManager = new LvInitiate(true, player);
+        ACTManager = new LvInitiate(true, player, LoadTileOnEdit);
 
         // toolbar init
         focus = 0;
@@ -188,5 +188,13 @@ public class GridEditor : Editor
                     break;
             }
         }
+    }
+    public GameObject LoadTileOnEdit(string tag, string name)
+    {
+        Object loaded = Resources.Load("Prefabs\\" + tag + "\\" + name, typeof(GameObject));
+        if (!loaded)
+            Debug.Log("tile " + name + " load failed.");
+
+        return PrefabUtility.InstantiatePrefab(loaded) as GameObject;
     }
 }
