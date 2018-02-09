@@ -11,6 +11,7 @@ TagManager:
   - Wall
   - Enemy
   - Event
+  - Item
   layers:
   - Default
   - TransparentFX

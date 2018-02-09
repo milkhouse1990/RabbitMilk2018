@@ -11,7 +11,14 @@ public delegate GameObject LoadTile(string tag, string name);
 //    |- CAMERA:
 //    |- PLAYER:
 //    |- LEVEL ITEM: core gameplay. dealt with by physics engine.
-//    |- EVENT ITEM: trigger to STORY.
+//    |- BREAKABLE ITEM: do something when hit by player's WEAPON.
+//    (check box)
+//    |- ACTIVE TRIGGER: press 'up' to activate while in the check box.     <npc>
+//       |- NPC:
+//       |- CUSTOME GIMMICK:
+//    |- PASSIVE TRIGGER: auto activate while in the check box.
+//       |- EVENT ITEM: trigger to STORY.                                   <Event>
+//       |- ITEM:                                                           <Item>
 //    |- BACKGROUND: non-interactive.
 // |- STORY: scenarios.
 public class LvInitiate
@@ -171,12 +178,7 @@ public class LvInitiate
             pre.transform.position = new Vector3(x, y, 0);
 
             if (tag == "Event")
-                if (name == "GotoPlot")
-                    pre.GetComponent<Plot>().plotno = arg;
-                else if (name == "GotoScene")
-                    pre.GetComponent<GotoScene>().scenename = arg;
-                else if (name == "GotoMap")
-                    pre.GetComponent<Plot>().plotno = arg;
+                pre.GetComponent<Plot>().plotno = arg;
         }
     }
     // load story
@@ -197,7 +199,7 @@ public class LvInitiate
                 return cut.contents;
             }
         }
-        Debug.Log("cannot load " + cutno + " .");
+        Debug.Log("cannot load " + cutno + ".");
         return null;
     }
 
