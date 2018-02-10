@@ -29,24 +29,12 @@ public class SystemData
     }
 }
 
-public class SystemDataManager : MonoBehaviour
+public class SystemDataManager
 {
 
-    private string dataFileName = "Save/systemsave.sav";//存档文件的名称,自己定//
     private XmlSaver xs = new XmlSaver();
     public SystemData systemdata;
-    // Use this for initialization
-    void Awake()
-    {
-        //if (!xs.hasFile(dataFileName))
-        //   Create();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void Create()
     {
         string systemDataFile = "Save";
@@ -87,5 +75,12 @@ public class SystemDataManager : MonoBehaviour
                 bool[] wrong_data = new bool[1] { false };
                 return wrong_data;
         }
+    }
+    public void Save()
+    {
+        string gameDataFile = "Save/" + "systemsave.sav";
+
+        string dataString = xs.SerializeObject(systemdata, typeof(SystemData));
+        xs.CreateXML(gameDataFile, dataString);
     }
 }

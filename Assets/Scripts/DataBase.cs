@@ -47,9 +47,10 @@ public class DataBase : MonoBehaviour
             liss[i] = new ListItems(binid);
         }
 
-        b_item[0] = GetComponent<SystemDataManager>().LoadBools("character_collection");
-        b_item[1] = GetComponent<SystemDataManager>().LoadBools("setting_collection");
-        b_item[2] = GetComponent<SystemDataManager>().LoadBools("ending_collection");
+        SystemDataManager systemDataManager = new SystemDataManager();
+        b_item[0] = systemDataManager.LoadBools("character_collection");
+        b_item[1] = systemDataManager.LoadBools("setting_collection");
+        b_item[2] = systemDataManager.LoadBools("ending_collection");
 
         //message lock manage    
 

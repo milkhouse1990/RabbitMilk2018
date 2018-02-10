@@ -71,7 +71,6 @@ GameObject:
   m_Component:
   - component: {fileID: 224304858983284350}
   - component: {fileID: 114976010145385718}
-  - component: {fileID: 114089664961451692}
   m_Layer: 5
   m_Name: DataBaseCanvas
   m_TagString: Untagged
@@ -130,17 +129,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114089664961451692
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1879876705249540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b9dfbeca1e48c84586a371e52c82e1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114242193004491912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -299,19 +287,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tachie: []
-  list_pos:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  info_pos:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  listtool: {fileID: 0}
 --- !u!222 &222045980577631610
 CanvasRenderer:
   m_ObjectHideFlags: 1

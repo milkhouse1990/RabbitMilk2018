@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 // control mode activation and switch
 // toppest manager of the ACT game scene
@@ -101,39 +100,6 @@ public class ModeSwitch : MonoBehaviour
                 }
                 break;
         }
-
-    }
-    void FixedUpdate()
-    {
-        if (currentMode == "act")
-        {
-
-            // check plot
-            Plot[] plots = FindObjectsOfType<Plot>() as Plot[];
-            foreach (Plot plot in plots)
-            {
-                if (player.transform.position.x > plot.transform.position.x)
-                {
-                    if (plot.name == "GotoPlot")
-                    {
-                        string binid = "PLOT" + plot.plotno;
-                        avgCanvas.GetComponent<AvgEngine>().Open(binid);
-                        EnterMode("avg");
-                        GameObject.Destroy(plot.gameObject);
-                        break;
-                    }
-                    else if (plot.name == "GotoScene")
-                        SceneManager.LoadScene(plot.plotno);
-                    else if (plot.name == "GotoMap")
-                    {
-                        EnterMode("map");
-                        int temp;
-                        int.TryParse(plot.plotno, out temp);
-                        mapCanvas.GetComponent<MapMove>().PlacesUpdate(temp);
-                    }
-                }
-            }
-        }
     }
 
     public void LoadSaveFile()
@@ -152,7 +118,7 @@ public class ModeSwitch : MonoBehaviour
         }
         EnterMode("act");
     }
-    public void EnterMode(string mode)
+    public void EnterMode(string mode, string arg = "")
     {
         mapCanvas.SetActive(false);
 
@@ -166,8 +132,14 @@ public class ModeSwitch : MonoBehaviour
         switch (mode)
         {
             case "map":
-                mapCanvas.SetActive(true);
                 player.GetComponent<Physics2DM>().velocity = new Vector2(0, 0);
+                mapCanvas.SetActive(true);
+                if (arg != "")
+                {
+                    int temp;
+                    int.TryParse(arg, out temp);
+                    mapCanvas.GetComponent<MapMove>().PlacesUpdate(temp);
+                }
                 break;
             case "act":
                 player.GetComponent<Platformer2DUserControl>().enabled = true;
@@ -175,6 +147,7 @@ public class ModeSwitch : MonoBehaviour
                 break;
             case "avg":
                 avgCanvas.SetActive(true);
+                avgCanvas.GetComponent<AvgEngine>().Open(arg);
                 player.GetComponent<Physics2DM>().velocity = new Vector2(0, 0);
                 player.GetComponent<PlatformerCharacter2D>().Move(0, false, false, true);
                 break;

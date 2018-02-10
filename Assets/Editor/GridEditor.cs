@@ -141,12 +141,7 @@ public class GridEditor : Editor
                             ei.name = go.name;
                             ei.x = go.transform.position.x;
                             ei.y = go.transform.position.y;
-                            if (go.name == "GotoPlot")
-                                ei.arg = go.GetComponent<Plot>().plotno;
-                            else if (go.name == "GotoScene")
-                                ei.arg = go.GetComponent<GotoScene>().scenename;
-                            else if (go.name == "GotoMap")
-                                ei.arg = go.GetComponent<Plot>().plotno;
+                            ei.arg = go.GetComponent<Plot>().plotno;
                             levelinfo.events.Add(ei);
                         }
                         else if (go.name == "Background")
