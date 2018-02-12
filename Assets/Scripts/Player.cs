@@ -6,9 +6,17 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     private ModeSwitch modeSwitch;
+
+    // for npc
+    private CheckBox npc;
+    // a sign telling you to press UP.
+    GameObject up;
     void Awake()
     {
-        modeSwitch = GameObject.Find("ACTManager").GetComponent<ModeSwitch>();
+        GameObject actmanager = GameObject.Find("ACTManager");
+        modeSwitch = actmanager.GetComponent<ModeSwitch>();
+        up = actmanager.transform.Find("ACTCanvas").Find("Up").gameObject;
+        up.SetActive(false);
     }
     // Use this for initialization
     void Start()
@@ -85,6 +93,12 @@ public class Player : MonoBehaviour
                             triggerOn = true;
                             break;
                         case "npc":
+                            if (!npc)
+                            {
+                                // meet a npc
+                                npc = checkBox;
+                                up.SetActive(true);
+                            }
                             if (Input.GetButtonDown("up"))
                             {
                                 arg = checkBox.GetComponent<Npc>().npcno;
@@ -102,10 +116,24 @@ public class Player : MonoBehaviour
                                     }
                                 triggerOn = true;
                             }
+                            else
+                            {
+                                // with the npc
+                                up.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 1.5f);
+                            }
                             break;
                     }
                     if (triggerOn)
                         break;
+                }
+                else
+                {
+                    if (checkBox == npc)
+                    {
+                        // leave the npc
+                        npc = null;
+                        up.SetActive(false);
+                    }
                 }
             }
         }
