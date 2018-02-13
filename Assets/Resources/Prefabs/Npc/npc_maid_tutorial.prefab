@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4369300891932666}
   - component: {fileID: 212850092591163092}
   - component: {fileID: 114511347169874858}
-  - component: {fileID: 114661674796275922}
+  - component: {fileID: 114187520693085518}
   m_Layer: 8
   m_Name: npc_maid_tutorial
   m_TagString: npc
@@ -42,6 +42,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114187520693085518
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1581566209587228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e4f2c87b4a94e0479049352dfd2a7ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size:
+    serializedVersion: 2
+    x: -0.5
+    y: 1
+    width: 1
+    height: 2
 --- !u!114 &114511347169874858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -54,24 +71,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcno: 0
---- !u!114 &114661674796275922
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1581566209587228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a68103b1c411c0f4a85c8f04a8a45692, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  check:
-    serializedVersion: 2
-    x: -0.5
-    y: 1
-    width: 1
-    height: 2
-  type: 0
 --- !u!212 &212850092591163092
 SpriteRenderer:
   m_ObjectHideFlags: 1

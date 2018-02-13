@@ -10,12 +10,14 @@ public class ModeSwitch : MonoBehaviour
 
     public string currentMode;
     // UI
+    private GameObject actCanvas;
     private GameObject mapCanvas;
     private GameObject avgCanvas;
     private GameObject fairyCanvas;
 
     void Awake()
     {
+        actCanvas = transform.Find("ACTCanvas").gameObject;
         mapCanvas = transform.Find("MapCanvas").gameObject;
         avgCanvas = transform.Find("AVGCanvas").gameObject;
         fairyCanvas = transform.Find("FairyCanvas").gameObject;
@@ -42,29 +44,6 @@ public class ModeSwitch : MonoBehaviour
         switch (currentMode)
         {
             case "act":
-                // check npc
-                if (Input.GetButtonDown("up"))
-                {
-                    ActiveTrigger[] npcs = FindObjectsOfType<ActiveTrigger>() as ActiveTrigger[];
-                    foreach (ActiveTrigger npc in npcs)
-                    {
-                        if (npc.CheckIn(player.GetComponent<ColliderBox>()))
-                        {
-                            if (npc.type == 0)
-                            {
-                                string binid = "NPC" + npc.GetComponent<Npc>().npcno;
-                                avgCanvas.GetComponent<AvgEngine>().Open(binid);
-                                EnterMode("avg");
-                                break;
-                            }
-                            else if (npc.type == 1)
-                            {
-                                npc.GetComponent<InsideOutsideTree>().EnterTree();
-                                break;
-                            }
-                        }
-                    }
-                }
                 // activate map canvas
                 if (Input.GetButtonDown("SELECT"))
                 {
@@ -122,6 +101,7 @@ public class ModeSwitch : MonoBehaviour
     {
         mapCanvas.SetActive(false);
 
+        actCanvas.SetActive(false);
         player.GetComponent<Platformer2DUserControl>().enabled = false;
 
         avgCanvas.SetActive(false);
@@ -142,6 +122,7 @@ public class ModeSwitch : MonoBehaviour
                 }
                 break;
             case "act":
+                actCanvas.SetActive(true);
                 player.GetComponent<Platformer2DUserControl>().enabled = true;
                 player.GetComponent<Physics2DM>().enabled = true;
                 break;

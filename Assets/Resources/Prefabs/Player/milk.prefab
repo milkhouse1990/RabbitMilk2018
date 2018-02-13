@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 114608835991581718}
   - component: {fileID: 114730164971383256}
   - component: {fileID: 114449347682113662}
+  - component: {fileID: 114056876631472738}
   m_Layer: 0
   m_Name: milk
   m_TagString: Player
@@ -206,6 +207,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114056876631472738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1472702091474996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3e1a185342b8a240a7946d89e0b1402, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114449347682113662
 MonoBehaviour:
   m_ObjectHideFlags: 1

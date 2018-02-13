@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4624465634940540}
   - component: {fileID: 212509177235205540}
   - component: {fileID: 61883499581418790}
-  - component: {fileID: 114548827707996958}
   m_Layer: 0
   m_Name: item_crystal
   m_TagString: Untagged
@@ -67,17 +66,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114548827707996958
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1947195708446302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 458e38da239a4fd429256c8653b9bafc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212509177235205540
 SpriteRenderer:
   m_ObjectHideFlags: 1
