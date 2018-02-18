@@ -16,22 +16,26 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GetComponent<Status>().GetDead())
-        {
-            Drop();
-            FallOut();
-        }
+
 
     }
     void FixedUpdate()
     {
-        Weapon[] weapons = FindObjectsOfType<Weapon>() as Weapon[];
-        foreach (Weapon weapon in weapons)
+        if (!GetComponent<Status>().GetDead())
         {
-            if (CheckIn(new Rect4(weapon.check).Local2World(weapon.transform)))
+            Weapon[] weapons = FindObjectsOfType<Weapon>() as Weapon[];
+            foreach (Weapon weapon in weapons)
             {
-                GetComponent<Status>().GetDamage(weapon.GetComponent<Status>());
-                weapon.GetComponent<Bullet>().Init();
+                if (CheckIn(new Rect4(weapon.check).Local2World(weapon.transform)))
+                {
+                    GetComponent<Status>().GetDamage(weapon.GetComponent<Status>());
+                    if (GetComponent<Status>().GetDead())
+                    {
+                        Drop();
+                        FallOut();
+                    }
+                    weapon.GetComponent<Bullet>().Init();
+                }
             }
         }
     }
@@ -68,8 +72,8 @@ public class Enemy : MonoBehaviour
         probs[2] = 100 - probs[0] - probs[1];
         RandomGroup rg = new RandomGroup(probs);
         int drop_item = rg.RandomChoose();
-        // if (drop_item < 2)
-        // Instantiate(drop[drop_item], transform.position, Quaternion.identity);
+        if (drop_item < 2)
+            Instantiate(drop[drop_item], transform.position, Quaternion.identity);
         ;
     }
     void FallOut()
