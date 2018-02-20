@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212255003363884326}
   - component: {fileID: 114754873629734720}
   - component: {fileID: 114999208336197356}
-  - component: {fileID: 114898935401584356}
+  - component: {fileID: 114751413715479420}
   m_Layer: 8
   m_Name: npc_cola_maid
   m_TagString: npc
@@ -43,6 +43,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114751413715479420
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1398400103353196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e4f2c87b4a94e0479049352dfd2a7ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size:
+    serializedVersion: 2
+    x: -0.5
+    y: 1
+    width: 1
+    height: 2
 --- !u!114 &114754873629734720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,24 +72,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcno: 2
---- !u!114 &114898935401584356
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1398400103353196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a68103b1c411c0f4a85c8f04a8a45692, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  check:
-    serializedVersion: 2
-    x: -0.5
-    y: 1
-    width: 1
-    height: 2
-  type: 0
 --- !u!114 &114999208336197356
 MonoBehaviour:
   m_ObjectHideFlags: 1

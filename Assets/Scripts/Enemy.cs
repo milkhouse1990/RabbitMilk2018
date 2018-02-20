@@ -73,7 +73,11 @@ public class Enemy : MonoBehaviour
         RandomGroup rg = new RandomGroup(probs);
         int drop_item = rg.RandomChoose();
         if (drop_item < 2)
-            Instantiate(drop[drop_item], transform.position, Quaternion.identity);
+        {
+            GameObject dropitem = Instantiate(drop[drop_item], transform.position, Quaternion.identity);
+            // delete "(Clone)" in the name
+            dropitem.name = dropitem.name.Substring(0, dropitem.name.Length - 7);
+        }
         ;
     }
     void FallOut()

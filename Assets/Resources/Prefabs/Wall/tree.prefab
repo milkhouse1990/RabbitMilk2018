@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 4676927520230786}
   - component: {fileID: 212034860664000762}
   - component: {fileID: 114496759745802454}
-  - component: {fileID: 114429980594053224}
+  - component: {fileID: 114824825262691740}
   m_Layer: 0
   m_Name: tree
   m_TagString: npc
@@ -260,24 +260,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 6
---- !u!114 &114429980594053224
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1823832597890412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a68103b1c411c0f4a85c8f04a8a45692, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  check:
-    serializedVersion: 2
-    x: -2.5
-    y: -2.5
-    width: 3
-    height: 3
-  type: 1
 --- !u!114 &114481453454165110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -343,6 +325,23 @@ MonoBehaviour:
     y: 0.25
     width: 19.5
     height: 0.5
+--- !u!114 &114824825262691740
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1823832597890412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e4f2c87b4a94e0479049352dfd2a7ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size:
+    serializedVersion: 2
+    x: -2.5
+    y: -2.5
+    width: 3
+    height: 3
 --- !u!212 &212034860664000762
 SpriteRenderer:
   m_ObjectHideFlags: 1

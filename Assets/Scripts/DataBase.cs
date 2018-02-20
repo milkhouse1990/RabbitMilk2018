@@ -73,6 +73,8 @@ public class DataBase : MonoBehaviour
             db_list = transform.Find("ListTool").GetComponent<ListTool>();
             db_list.InitText(liss[labelpos]);
         }
+
+        UpdateMenu();
     }
 
     // Update is called once per frame

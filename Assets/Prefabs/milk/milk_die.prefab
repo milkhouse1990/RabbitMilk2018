@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4608305040964738}
   - component: {fileID: 114684599464779030}
-  - component: {fileID: 114315432725801016}
   m_Layer: 0
   m_Name: milk_die
   m_TagString: Untagged
@@ -41,20 +40,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114315432725801016
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1845708092438550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1776d250c4a776f49bb364e705eefe77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  life: {fileID: 2800000, guid: 64cc8cf60f24c5f45b14ae02edac6f73, type: 3}
-  tank: {fileID: 2800000, guid: 57d8a41e576ec4a4ab3a25cf146f0ea9, type: 3}
-  icon_milk: {fileID: 2800000, guid: 990f2d71993903647854f77d8145309f, type: 3}
 --- !u!114 &114684599464779030
 MonoBehaviour:
   m_ObjectHideFlags: 1

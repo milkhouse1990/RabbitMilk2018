@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4865677548441122}
   - component: {fileID: 212769611233494250}
   - component: {fileID: 114731997636594076}
-  - component: {fileID: 114949704609028046}
+  - component: {fileID: 114946756912493640}
   m_Layer: 8
   m_Name: npc_maid0
   m_TagString: npc
@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcno: 0
---- !u!114 &114949704609028046
+--- !u!114 &114946756912493640
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -62,16 +62,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1973187194049900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a68103b1c411c0f4a85c8f04a8a45692, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e4f2c87b4a94e0479049352dfd2a7ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  check:
+  size:
     serializedVersion: 2
     x: -0.5
     y: 1
     width: 1
     height: 2
-  type: 0
 --- !u!212 &212769611233494250
 SpriteRenderer:
   m_ObjectHideFlags: 1

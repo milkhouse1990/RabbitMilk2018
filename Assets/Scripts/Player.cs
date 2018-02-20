@@ -16,12 +16,18 @@ public class Player : MonoBehaviour
         GameObject actmanager = GameObject.Find("ACTManager");
         modeSwitch = actmanager.GetComponent<ModeSwitch>();
         up = actmanager.transform.Find("ACTCanvas").Find("Up").gameObject;
-        up.SetActive(false);
+        // up.SetActive(false);
+
+        actmanager.transform.Find("ACTCanvas").Find("BossHpGauge").gameObject.SetActive(false);
     }
     // Use this for initialization
     void Start()
     {
 
+    }
+    void OnEnable()
+    {
+        up.SetActive(false);
     }
 
     // Update is called once per frame
@@ -101,10 +107,10 @@ public class Player : MonoBehaviour
                             }
                             if (Input.GetButtonDown("up"))
                             {
-                                arg = checkBox.GetComponent<Npc>().npcno;
-                                if (arg != "")
+                                Npc conpc = checkBox.GetComponent<Npc>();
+                                if (conpc != null)
                                 {
-                                    string binid = "NPC" + arg;
+                                    string binid = "NPC" + conpc.npcno;
                                     modeSwitch.EnterMode("avg", binid);
                                 }
                                 else
@@ -128,7 +134,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    if (checkBox == npc)
+                    if (checkBox == npc || npc == null)
                     {
                         // leave the npc
                         npc = null;
